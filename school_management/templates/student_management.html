@@ -1,4 +1,3 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -66,8 +65,8 @@
             bottom: 0;
             left: 100%;
             width: 100%;
-            height: 3px; /* Set the height of the loading bar */
-            background: #0074d9; /* Set the loading bar color */
+            height: 3px; 
+            background: #0074d9; 
             z-index: 1;
             {% comment %} transition: left 5s ease-in; {% endcomment %}
         }
@@ -444,7 +443,7 @@
             {% endif %}
 
             <form action="/academic_grades/" method="post" id="academic_grades">
-                    <!-- {% csrf_token %} -->
+                    {% csrf_token %}
                     <h4 style="margin-bottom: 50px;">Academic Grades</h4>
 
                     <div class="start">
@@ -509,7 +508,7 @@
             
 
             <form action="/cocurricular_performance/" method="post" id='cc_form'>
-                <!-- {% csrf_token %} -->
+                {% csrf_token %} 
                 <input type='hidden' name='form_type' value='fetch'>
                 <h4>Cocurricular Performance</h4>
                 <div>
@@ -519,7 +518,7 @@
                 <button type='submit'>Fetch Details</button>
             </form>
 
-            <!-- {% if details_for_cc %} -->
+          {% if details_for_cc %}
             <form action="/cocurricular_performance/" method="post" style="display: none;">
                 <input type='hidden' name='form_type' value='fill'>
                 {% csrf_token %}
@@ -532,7 +531,7 @@
                 <input type='text' name='performance_remark'>
                 <button type='submit'>Add</button>
             </form>
-            <!-- {% endif %} -->
+         {% endif %} 
         </div>
     </div>
     <footer>
@@ -556,88 +555,7 @@
     
     </footer>
     
-    <script>
-
-        var side_bar = document.querySelector(".side-bar");
-        var ham = document.getElementById("menus");
-        var close = document.getElementById("close");
-
-        ham.addEventListener("click", ()=>{
-            side_bar.classList.toggle("show-side");
-        });
-
-        close.addEventListener("click", ()=>{
-          side_bar.classList.toggle("show-side");
-        });
-
-        var nav1 = document.querySelector(".navbar1");
-        var val;
-        window.onscroll = function(){
-            if(document.documentElement.scrollTop > 20){
-                nav1.classList.add("sticky");
-            }
-            else{
-                nav1.classList.remove("sticky");
-            }
-        }
-
-        const newEnrollment = document.getElementById('new_enrollment');
-        const newEnrollmentDetails = document.getElementById('new_enrollment_details');
-        const existingStudent = document.getElementById('existing_student');
-        const options = document.getElementById('options');
-        const fee = document.getElementById('fee');
-        const feeDetails = document.getElementById('fee_details');
-        const grades = document.getElementById('grades-entry');
-        const academicGrades = document.getElementById('academic_grades');
-        const fetch_fill= document.getElementById('fetch_fill');
-        const cc_form = document.getElementById('cc_form');
-        const activities= document.getElementById('activities');
-        const modify_details_form = document.getElementById('modify_details_form');
-        const modify_details = document.getElementById('modify_details');
-
-        function hideAllForms() {
-            newEnrollmentDetails.style.display = 'none';
-            options.style.display = 'none';
-            feeDetails.style.display = 'none';
-            academicGrades.style.display = 'none';
-            cc_form.style.display = 'none';
-            modify_details_form.style.display = 'none';
-        }
-
-        modify_details.addEventListener('click',function(){
-            hideAllForms();
-            options.style.display = 'block';
-            modify_details_form.style.display = 'block';
-        });
-
-        newEnrollment.addEventListener('click', function () {
-            hideAllForms();
-            newEnrollmentDetails.style.display = 'block';
-        });
-
-        existingStudent.addEventListener('click', function () {
-            hideAllForms();
-            options.style.display = 'block';
-        });
-
-        fee.addEventListener('click', function () {
-            hideAllForms();
-            options.style.display = 'block';
-            feeDetails.style.display = 'block';
-        });
-
-        grades.addEventListener('click', function () {
-            hideAllForms();
-            options.style.display = 'block';
-            academicGrades.style.display = 'block';
-        });
-
-        activities.addEventListener('click',function(){
-            hideAllForms();
-            options.style.display = 'block';
-            cc_form.style.display = 'block';
-        });
-    </script>
+    <script src="{% static "student_management.js" %}"></script>
 
 </body>
 </html>
