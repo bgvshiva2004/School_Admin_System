@@ -1,0 +1,589 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "main.css" %}">
+    <link rel="stylesheet" href="{% static "form.css" %}">
+    <link rel="stylesheet" href="{% static "sidebar.css" %}">
+    <script src="https://kit.fontawesome.com/0ceeca1f1f.js" crossorigin="anonymous"></script>
+    <title>Employee Management</title>
+    <style>
+        #new_employee{
+            cursor: pointer;
+        }
+        #add_employee{
+            display: none;
+        }
+        #existing_employee{
+            cursor: pointer;
+        }
+        #existing_employee_options{
+            display: none;
+        }
+        .forms{
+            display:none;
+        }
+        #message-container {
+            position: relative;
+            background: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            overflow: hidden;
+            width: 50%;
+        }
+        
+        #loading-bar {
+            position: absolute;
+            bottom: 0;
+            left: 100%;
+            width: 100%;
+            height: 3px; /* Set the height of the loading bar */
+            background: #0074d9; /* Set the loading bar color */
+            z-index: 1;
+            /* {% comment %} transition: left 5s ease-in; {% endcomment %} */
+        }
+        
+        #message-content {
+            z-index: 2;
+        }
+        
+        .message {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #fff;
+            margin-bottom: 10px;
+        }
+        #personal_details_form,#work_details_form,#salary_details_form{
+            display: none;
+        }
+        #personal_details,#work_details,#salary_details{
+            cursor: pointer;
+        }
+        #existing_employee_options{
+            position: absolute;
+            top: 30%;
+            right: 10%;
+        }
+        #existing_employee_options li{
+            list-style-type: disc;
+            color: var(--secondary-color);
+            font-size: 18px;
+            transition: 0.3s ease-in-out;
+            line-height: 30px;
+        }
+        #existing_employee_options li:hover{
+            color: #fff;
+        }
+        #add_employee .start{
+            width: 60%; 
+            margin: 10px auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        #add_employee .start label{
+            font-size: 20px;
+        }
+        
+        .main form .select{
+            width: 60%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .main form div select{
+            height: 40px;
+            padding: 10px;
+            width: 80%;
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            outline: none;
+            cursor: pointer;
+            color: var(--secondary-color);
+            font-size: 16px;
+        }
+
+        .main form div select:hover{
+            background-color: var(--secondary-color);
+            color: #fff;
+        }
+        .work-specification{
+            padding: 50px 0px 20px 0px;
+            width: 70%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .work-specification label{
+            font-weight: 700;
+            width: 30%;
+            font-size: 20px;
+        }
+        .work-specification input{
+            width: 40%;
+        }
+        .modifyemployee , .modifywork{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .double{
+            margin-bottom: 30px;
+        }
+        .main.add-employee{
+            height: 160vh;
+        }
+        #teaching_form .single , #modify_work_details_form .single{
+            width: 60%;
+            display: block;
+            margin: 10px auto;
+        }
+        #teaching_form .single label , #modify_work_details_form .single label{
+            text-align: left;
+            font-size: 18px;
+            margin-right: 20px;
+        }
+    </style> 
+</head>
+<body>
+    <div class="navbar1">
+        <div class="hamburger1" id="menus"><i class="fa-solid fa-bars"></i></div>
+        <div class="school_title">
+            <a href="{% url "index" %}"><h3 style="font-size: 40px;">Champ School</h3></a>
+        </div>
+        <div>
+          <a href="{% url "login" %}" class="login">
+            <div class="Login">
+              <i class="fa-solid fa-user"></i>
+            </div>
+        </a>
+      </div>
+      </div>
+
+      <div class="side-bar">
+        <div id="close"><i class="fa-solid fa-xmark"></i></div>
+        <ul>
+          <li><a href="{% url "index" %}">Home</a></li>
+          <li><a href="admission.html">Admission</a></li>
+          <li><a href="{% url "academics" %}">Academics</a></li>
+          <li><a href="{% url "life" %}">Student Life</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="{% url "login" %}">Login</a></li>
+        </ul>
+    </div>
+
+    <div class="side">
+        <ul>
+            <li id="new_employee">Add Employee</li>
+            <li id="existing_employee">Existing employee</li>
+        </ul>
+        <div id="existing_employee_info">
+            <ul id="existing_employee_options">
+                <li id='personal_details'>Modify Personal Details</li>
+                <li id='work_details'>Modify Work Details</li>
+                <li id='salary_details'>Modify Salary Details</li>
+            </ul>
+            <!-- {% comment %} data has to be retrived here  {% endcomment %} -->
+        </div>
+    </div>
+    
+    
+    {% for msg in messages %}
+    <div id="message-container">
+        <div id="loading-bar"></div>
+        <div id="message-content">
+            
+                <div class="message">{{ msg }}</div>
+            
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="main add-employee">
+        <form action="/new_employee/" method="post" id="add_employee">
+            {% csrf_token %}
+            <h4>Personal Details</h4>
+            <div class="start">
+                <label for="emp-id" class="labels">Employee Id</label>
+                <input type="text" name="employee_id">
+            </div>
+            <div>
+                <div>
+                    <label for="first-name" class="labels">First Name</label>
+                    <input type="text" name="first_name">
+                </div>
+                <div>
+                    <label for="last-name" class="labels">Last Name</label>
+                    <input type="text" name="last_name">
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="qualification" class="labels">Qualification</label>
+                    <input type="text" name="qualification">
+                </div>
+                <div>
+                    <label for="experience" class="labels">Experience</label>
+                    <input type="text" name="experience">
+                </div>
+            </div>
+            <div>
+                <div>
+                    <label for="email" class="labels">Email</label>
+                    <input type="email" name="email">
+                </div>
+                <div>
+                    <label for="contact" class="labels">Contact</label>
+                    <input type="text" name="contact">
+                </div>
+            </div>
+            <div class="work-specification">
+                <label for="dropdown">Work Specification</label>
+                <select id="dropdown" name="work_type">
+                    <option value="" disabled selected>Select the type</option>
+                    <option value="teaching">Teaching</option>
+                    <option value="non_teaching">Non Teaching</option>
+                </select>
+            </div>
+            <div id="teaching_form" class="forms">
+                <div class="double">
+                    <div>
+                        <label for="working hours" class="labels">Working Hrs</label>
+                        <input type="number" name="working_hours">
+                    </div>
+                    <div>
+                        <label for="subject-id" class="labels">Subject Id</label>
+                        <input type="text" name="subject_id">
+                    </div>
+                </div>
+                <div class="single">
+                    <label for="subject" class="labels">Subject</label>
+                    <input type="text" name="subject">
+                </div>
+            </div>
+            <div id="non_teaching_form" class="forms">
+                <div class="double">
+                    <div>
+                        <label for="working hours" class="labels">Working Hrs</label>
+                        <input type="number" name="working_hours">
+                    </div>
+                    <div>
+                        <label for="role" class="labels">Role</label>
+                        <input type="text" name="role">
+                    </div>
+                </div>
+            </div>
+
+            <h4>Finance Details</h4>
+                <div>
+                    <div>
+                        <label for="acc-no" class="labels">Account No</label>
+                        <input type="number" name="account_no">
+                    </div>
+                    <div>
+                        <label for="bank-name" class="labels">Bank</label>
+                        <input type="text" name="bank">
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label for="IFSC" class="labels">IFSC code</label>
+                        <input type="text" name="ifsc_code">
+                    </div>
+                    <div>
+                        <label for="salary" class="labels">Salary</label>
+                        <input type="number" name="salary">
+                    </div>
+                </div>
+            <button type="submit">Add</button>
+        </form>
+
+        <form action='/modify_employee_details/' method='post' id='personal_details_form' style="display:none;">
+            {% csrf_token %}
+            <input type='hidden' name='form_type' value='fetch'>
+            <h4>Search Employee</h4>
+            <div class="single">
+                <label for="emp-id" class="labels">Employee Id</label>
+                <input type="text" name="employee_id">
+            </div>
+            <button type='submit'>Fetch Details</button>
+        </form>
+
+        {% if fetch_details %}
+        
+        <form action='/modify_employee_details/' method='post' class="modifyemployee" id='fetch_details_form'>
+            {% csrf_token %}
+            <input type='hidden' name='form_type' value='fill'>
+            <h4>Modify Employee Personal Details</h4>
+        <div class='double'>
+                <div>
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name" placeholder={{ fetch_details.first_name }}>
+                </div>
+                <div>
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name" placeholder={{ fetch_details.last_name }}>
+        </div>
+            </div>
+
+        <div class='double'>
+            <div>
+            <label for="qualification">Qualification</label>
+            <input type="text" name="qualification" placeholder={{ fetch_details.qualification }}>
+        </div>
+        <div>
+            <label for="experience">Experience</label>
+            <input type="text" name="experience" placeholder={{ fetch_details.experience }}>
+        </div>
+        </div>  
+        <div class='double'>
+            <div>
+            <label for="email">Email</label>
+            <input type="email" name="email" placeholder={{ fetch_details.email }}>
+        </div>
+        <div>
+            <label for="contact">Contact</label>
+            <input type="text" name="contact" placeholder={{ fetch_details.contact }}>
+        </div>
+        </div>
+            
+            <button type='submit'>Save Changes</button>
+        </form>
+        {% endif %}
+
+        <form action='/modify_work_details/' method ='post' id='work_details_form' style='display:none;'>
+            {% csrf_token %}
+            <input type='hidden' name='form_type' value='fetch'>
+            <h4>Search Employee</h4>
+            <div class="single">
+                <label for="emp-id" class="labels">Employee Id</label>
+                <input type="text" name="employee_id">
+            </div>
+            <button type='submit'>Fetch Details</button>
+        </form>
+
+        {% if details %}
+        <form action='/modify_work_details/' method ='post' class="modifywork" id='modify_work_details_form'>
+            {% csrf_token %}
+            <input type='hidden' name='form_type' value='fill'>
+            <h4>Modify Working Details</h4>
+            <div>
+                <div>
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name" placeholder={{ details.first_name }}>
+        </div>
+            <div>
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name" placeholder={{ details.last_name }}>
+        </div>
+        </div>
+        <div>
+            <div>
+            <label for="work_type">Work Type</label>
+            <input type="text" name="work_type" placeholder={{ details.work_type }}>
+        </div>
+        <div>
+            <label for="working_hours">Working Hours</label>
+            <input type="text" name="working_hours" placeholder={{ details.working_hours }}>
+        </div>
+        </div>
+        <div>
+            <div>
+            <label for="subject_id">Subject ID</label>
+            <input type="text" name="subject_id" placeholder={{ details.subject_id }}>
+        </div>
+        <div>
+            <label for="subject">Subject</label>
+            <input type="text" name="subject" placeholder={{ details.subject }}>
+        </div>
+        </div>
+            <div class='single'>
+            <label for="role">Role</label>
+            <input type="text" name="role" placeholder={{ details.role }}>
+        </div>
+            <button type='submit'>Save Changes</button>
+        </form>
+        {% endif %}
+
+        <form action='/modify_salary_details/' method ='post' id='salary_details_form'>
+            {% csrf_token %}
+            <input type='hidden' name='form_type' value='fetch'>
+            <h4>Search Employee</h4>
+            <div class="single">
+                <label for="emp-id" class="labels">Employee Id</label>
+                <input type="text" name="employee_id">
+            </div>
+            <button type='submit'>Fetch Details</button>
+        </form>
+
+        {% if salary_details %}
+        <form action='/modify_salary_details/' method ='post' style="display: none;">
+            {% csrf_token %}
+            <input type='hidden' name='form_type' value='fill'>
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name" placeholder={{salary_details.first_name }}>
+            
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name" placeholder={{salary_details.last_name }}>
+            
+            <label for="account_no">Account Number</label>
+            <input type="text" name="account_no" placeholder={{ salary_details.account_no }}>
+            
+            <label for="bank">Bank</label>
+            <input type="text" name="bank" placeholder={{ salary_details.bank }}>
+            
+            <label for="ifsc_code">IFSC Code</label>
+            <input type="text" name="ifsc_code" placeholder={{ salary_details.ifsc_code }}>
+            
+            <label for="salary">Salary</label>
+            <input type="text" name="salary" placeholder={{ salary_details.salary }}>
+            
+            <button type='submit'>Save Changes</button>
+
+        </form>
+        {% endif %}
+    </div>
+
+    <footer>
+        <div class="footer">
+        <div class="info">
+            <h4>Champ School</h4>
+        </div>
+        <div class="social">
+            <ul>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+            </ul>
+        </div>
+        <div class="rights">
+            <p><i class="fa-solid fa-copyright"></i> Copyrights reserved.</p>
+        </div>
+        </div>
+        
+    
+    </footer>
+
+    <script>
+
+        var side_bar = document.querySelector(".side-bar");
+        var ham = document.getElementById("menus");
+        var close = document.getElementById("close");
+
+        ham.addEventListener("click", ()=>{
+            side_bar.classList.toggle("show-side");
+        });
+
+        close.addEventListener("click", ()=>{
+          side_bar.classList.toggle("show-side");
+        });
+
+        var nav1 = document.querySelector(".navbar1");
+        var val;
+        window.onscroll = function(){
+            if(document.documentElement.scrollTop > 20){
+                nav1.classList.add("sticky");
+            }
+            else{
+                nav1.classList.remove("sticky");
+            }
+        }
+    </script>
+
+    <script>
+        const newEmployee = document.getElementById('new_employee');
+        const addEmployee = document.getElementById('add_employee');
+        const existingEmployee = document.getElementById('existing_employee');
+        const existingEmployeeOptions = document.getElementById('existing_employee_options');
+        const dropdown = document.getElementById('dropdown');
+        const teachingForm = document.getElementById('teaching_form');
+        const nonTeachingForm = document.getElementById('non_teaching_form');
+    
+        const personal_details_form = document.getElementById('personal_details_form');
+        const personal_details = document.getElementById('personal_details');
+        const work_details =document.getElementById('work_details');
+        const work_details_form = document.getElementById('work_details_form');
+        const salary_details =document.getElementById('salary_details');
+        const salary_details_form =document.getElementById('salary_details_form');
+
+        function hideAllForms() {
+            addEmployee.style.display = 'none';
+            existingEmployeeOptions.style.display = 'none';
+            teachingForm.style.display = 'none';
+            nonTeachingForm.style.display = 'none';
+            personal_details_form.style.display = 'none';
+            work_details_form.style.display = 'none';
+            salary_details_form.style.display = 'none';
+        }
+    
+        newEmployee.addEventListener('click', function () {
+            hideAllForms();
+            addEmployee.style.display = 'block';
+        });
+    
+        existingEmployee.addEventListener('click', function () {
+            hideAllForms();
+            existingEmployeeOptions.style.display = 'block';
+        });
+        
+        personal_details.addEventListener('click',function(){
+            hideAllForms();
+            existingEmployeeOptions.style.display = 'block';
+            personal_details_form.style.display = 'block';
+        });
+
+        work_details.addEventListener('click',function(){
+            hideAllForms();
+            existingEmployeeOptions.style.display = 'block';
+            work_details_form.style.display = 'block';
+        });
+
+        salary_details.addEventListener('click',function(){
+            hideAllForms();
+            existingEmployeeOptions.style.display = 'block';
+            salary_details_form.style.display = 'block';
+        });
+        dropdown.addEventListener("change", function () {
+            const selectedOption = dropdown.value;
+            hideAllForms();
+            addEmployee.style.display = 'block';
+            if (selectedOption === "teaching") {
+                teachingForm.style.display = 'block';
+            } else if (selectedOption === "non_teaching") {
+                nonTeachingForm.style.display = 'block';
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var loadingBar = document.getElementById("loading-bar");
+            var messageContainer = document.getElementById("message-container");
+        
+            // Animate the loading bar
+            var width = 100;
+            var interval = setInterval(function () {
+                if (width <= 0) {
+                    clearInterval(interval);
+                    // Hide the message container
+                    messageContainer.style.display = "none";
+                } else {
+                    width -= 1;
+                    loadingBar.style.left = width + "%";
+                }
+            }, 25); // Adjust the speed of the loading bar animation by changing the interval duration
+        });
+      
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,100 @@
+body{
+    display: flex;
+    justify-content: center;
+}
+.student{
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+}
+.s-manage{
+    cursor: pointer;
+}
+.s-options{
+    list-style: none;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.student:hover .s-options{
+    display: block;
+}
+.s-options.active{
+    display: block;
+}
+.employee{
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+}
+.e-manage{
+    cursor: pointer;
+}
+.e-options{
+    list-style: none;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.employee:hover .e-options{
+    display: block;
+}
+.e-options.active{
+    display: block;
+}
+.finance{
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+}
+.f-manage{
+    cursor: pointer;
+}
+.f-options{
+    list-style: none;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.finance:hover .f-options{
+    display: block;
+}
+.f-options.active{
+    display: block;
+}
+.defaults{
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+}
+.d-manage{
+    cursor: pointer;
+}
+.d-options{
+    list-style: none;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.defaults:hover .d-options{
+    display: block;
+}
+.d-options.active{
+    display: block;
+}

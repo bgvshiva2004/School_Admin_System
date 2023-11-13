@@ -1,0 +1,223 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <style>
+        .container{
+            display:flex;
+            justify-content:center;
+        }
+        a{
+            margin-right:20px;
+            margin-left:20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href='{% url "entry" %}'>Enroll / Modify details and data</a>
+        <a href='{% url "view" %}'>View details and data</a>
+    </div>
+</body>
+</html> {% endcomment %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "main.css" %}">
+    <script src="https://kit.fontawesome.com/0ceeca1f1f.js" crossorigin="anonymous"></script>
+    <title>Admin</title>
+    <style>
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+        body{
+            background-color: rgba(0, 174, 173, 0.15);
+        }
+        a{
+            margin-right:20px;
+            margin-left:20px;
+        }
+        .maincontainer{
+            position: relative;
+            width: 20vw;
+            height: 50vh;
+            margin: auto 20px;
+        }
+        .thecard{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: all 0.5s ease-in-out;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 18px;
+            border-radius: 10px;
+        }
+        .thecard:hover{
+            transform: rotateY(180deg);
+        }
+        .thecard h3{
+            margin-top: 40%;
+            margin-left: 10%;
+            margin-right: 10%;
+            line-height: 40px;
+        }
+        .thefront{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background-color: rgba(0, 174, 173, 0.5);
+            color: #fff;
+            border-radius: 10px;
+            border: 2px solid var(--secondary-color);
+        }
+        .theback{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 174, 173, 0.5);
+            color: var(--secondary-color);
+            transform: rotateY(180deg);
+            border-radius: 10px;
+        }
+        .theback{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .theback ul li{
+            list-style-type: none;
+            padding: 10px;
+        }
+        {% comment %} .navbar1{
+            z-index: 2;
+        } {% endcomment %}
+    </style>
+</head>
+<body>
+    <div class="navbar1">
+        <div class="hamburger1" id="menus"><i class="fa-solid fa-bars"></i></div>
+        <div class="school_title">
+            <a href="{% url "index" %}"><h3 style="font-size: 40px;">Champ School</h3></a>
+        </div>
+        <div>
+          <a href="{% url "login" %}" class="login">
+            <div class="Login">
+              <i class="fa-solid fa-user"></i>
+            </div>
+        </a>
+      </div>
+      </div>
+
+      <div class="side-bar">
+        <div id="close"><i class="fa-solid fa-xmark"></i></div>
+        <ul>
+          <li><a href="{% url "index" %}">Home</a></li>
+          <li><a href="admission.html">Admission</a></li>
+          <li><a href="{% url "academics" %}">Academics</a></li>
+          <li><a href="{% url "life" %}">Student Life</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="{% url "login" %}">Login</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+            <div class="maincontainer">
+                <a href='{% url "entry" %}'>
+                    <div class="thecard">
+                        <div class="thefront">
+                            <h3>Enroll / Modify details and data</h3>
+                        </div>
+                        <div class="theback">
+                            <ul>
+                                <li>Student Management</li>
+                                <li>Employee Management</li>
+                                <li>Finance</li>
+                                <li>Set / Modify Defaults</li>
+                            </ul>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="maincontainer">
+                <a href='{% url "view" %}'>
+                    <div class="thecard">
+                        <div class="thefront">
+                            <h3>View details and data</h3>
+                        </div>
+                        <div class="theback">
+                            <ul>
+                                <li>Classwise Students List</li>
+                                <li>Student Particulars</li>
+                                <li>Employee Particulars</li>
+                                <li>Past Finance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </a>
+            </div>
+    </div>
+
+    <footer>
+        <div class="footer">
+        <div class="info">
+            <h4>Champ School</h4>
+        </div>
+        <div class="social">
+            <ul>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+            </ul>
+        </div>
+        <div class="rights">
+            <p><i class="fa-solid fa-copyright"></i> Copyrights reserved.</p>
+        </div>
+        </div>
+        
+    
+    </footer>
+
+    <script>
+        var side_bar = document.querySelector(".side-bar");
+        var ham = document.getElementById("menus");
+        var close = document.getElementById("close");
+
+        ham.addEventListener("click", ()=>{
+            side_bar.classList.toggle("show-side");
+        });
+
+        close.addEventListener("click", ()=>{
+          side_bar.classList.toggle("show-side");
+        });
+
+        var nav1 = document.querySelector(".navbar1");
+        var val;
+        window.onscroll = function(){
+            if(document.documentElement.scrollTop > 20){
+                nav1.classList.add("sticky");
+            }
+            else{
+                nav1.classList.remove("sticky");
+            }
+        }
+    </script>
+</body>
+</html>

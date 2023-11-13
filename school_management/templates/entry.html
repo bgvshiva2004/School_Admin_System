@@ -1,0 +1,337 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entry</title>
+    <link rel="stylesheet" href="{% static "main.css" %}">
+    <script src="https://kit.fontawesome.com/0ceeca1f1f.js" crossorigin="anonymous"></script>
+    <style> 
+        /* .tags{
+            display: flex;
+            align-items:flex-start;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 50px;
+            height: 80vh;
+        }
+
+        .tags div{
+          width: 25%;
+          text-align: center;
+        }
+
+        .tags div a{
+            text-decoration: none;
+            color: var(--primary-color);
+            font-size: 22px;
+            position: relative;
+        }
+
+        .tags div a:hover::after{
+            content: "";
+            position: absolute;
+            width: 70%;
+            left: 15%;
+            height: 3px;
+            bottom: -10px;
+            background-color: var(--secondary-color);
+            animation: anim 0.3s linear forwards;
+        }
+
+        @keyframes anim{
+          0%{
+            width: 0%;
+          }
+          100%{
+            width: 70%;
+          }
+        }
+
+        .show{
+            display: none;
+        }
+
+        .tags div ul{
+          padding: 30px 20px;
+          background-color: rgba(0, 174, 173, 0.5);
+          margin: 20px auto;
+          width: 100%;
+          border-radius: 10px;
+          box-shadow: 0px 0px 10px rgba(0, 174, 173, 0.5);
+          padding-left: 50px;
+        }
+
+        .tags div ul li{
+          list-style-type:circle;
+          line-height: 40px;
+          color: #fff;
+          font-size: 22px;
+          text-align: left;
+        } */
+        .tags{
+          height: 85vh;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+        }
+        .maincontainer.set ul li{
+          list-style-type: none;
+          text-align :center;
+        }
+        .maincontainer{
+            position: relative;
+            width: 20vw;
+            height: 50vh;
+            margin: auto 20px;
+        }
+        .thecard{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: all 0.5s ease-in-out;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 18px;
+            border-radius: 10px;
+        }
+        .thecard:hover{
+            transform: rotateY(180deg);
+        }
+        .thecard h3{
+            margin-top: 40%;
+            margin-left: 10%;
+            margin-right: 10%;
+            line-height: 40px;
+        }
+        .thefront{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background-color: rgba(0, 174, 173, 0.5);
+            color: #fff;
+            border-radius: 10px;
+            border: 2px solid var(--secondary-color);
+        }
+        .theback{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 174, 173, 0.5);
+            color: var(--secondary-color);
+            transform: rotateY(180deg);
+            border-radius: 10px;
+        }
+        .theback{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .theback ul li{
+            list-style-type: disc;
+            padding: 10px;
+            text-align: left;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navbar1">
+        <div class="hamburger1" id="menus"><i class="fa-solid fa-bars"></i></div>
+        <div class="school_title">
+            <a href="{% url "index" %}"><h3 style="font-size: 40px;">Champ School</h3></a>
+        </div>
+        <div>
+          <a href="{% url "login" %}" class="login">
+            <div class="Login">
+              <i class="fa-solid fa-user"></i>
+            </div>
+        </a>
+      </div>
+      </div>
+
+      <div class="side-bar">
+        <div id="close"><i class="fa-solid fa-xmark"></i></div>
+        <ul>
+          <li><a href="{% url "index" %}">Home</a></li>
+          <li><a href="admission.html">Admission</a></li>
+          <li><a href="{% url "academics" %}">Academics</a></li>
+          <li><a href="{% url "life" %}">Student Life</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="{% url "login" %}">Login</a></li>
+        </ul>
+    </div>
+    
+    <div class="tags">
+        <div class="maincontainer">
+            <a href="{% url "student_management" %}">
+              <div class="thecard">
+                <div class="thefront">
+                  <h3 class="s-manage">Student Management</h3>
+                </div>
+                <div class="theback">
+                  <ul class="s-options show">
+                      <li>New Enrollment</li>
+                      <li>Existing Student</li>
+                      <!-- {% comment %} -->
+                      <li>Academics</li>
+                      <li>Fee details</li>
+                      <li>Reports</li>
+                      <!-- {% endcomment %} -->
+                  </ul>
+                </div>
+            </div>
+            </a>
+        </div>
+
+        <div class="maincontainer">
+            <a href="{% url "employee_management" %}">
+              <div class="thecard">
+                <div class="thefront">
+                  <h3 class="e-manage">Employee Management</h3>
+                </div>
+                <div class="theback">
+                  <ul class="e-options show">
+                      <li>New Employee</li>
+                      <li>Existing Employee</li>
+                      <!-- {% comment %}  -->
+                      <li>Duty</li>
+                      <li>Finance</li>
+                      <li>Reports</li>
+                      <!-- {% endcomment %} -->
+                  </ul>
+                </div>
+            </div>
+            </a>
+        </div>
+
+        <div class="maincontainer">
+            <a href="{% url "finance" %}">
+              <div class="thecard">
+                <div class="thefront">
+                  <h3 class="f-manage">Finance</h3>
+                </div>
+                <div class="theback">
+                  <ul class="f-options show">
+                    <li>Today's Fee Collection</li>
+                    <li>Today's Expenditure</li>  
+                  </ul>
+                </div>
+              </div>
+            </a>
+        </div>
+
+        <div class="maincontainer set">
+            <a href="{% url "defaults" %}">
+              <div class="thecard">
+                <div class="thefront">
+                  <h3 class="d-manage">Set / Modify Defaults</h3>
+                </div>
+                <div class="theback">
+                  <ul class="d-options show">
+                      <li>ClassWise Fee Details</li>
+                      <li>Area Wise Transport Fee Details</li>
+                      <li>Activities</li>
+                      <li>Modify ClassWise Fee Details</li>
+                      <li>Modify Area Wise Transport Fee Details</li>
+                  </ul>
+                </div>
+              </div>
+            </a>
+        </div>
+    </div>
+    
+    <footer>
+      <div class="footer">
+        <div class="info">
+          <h4>Champ School</h4>
+        </div>
+        <div class="social">
+          <ul>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+          </ul>
+        </div>
+        <div class="rights">
+          <p><i class="fa-solid fa-copyright"></i> Copyrights reserved.</p>
+        </div>
+      </div>
+      
+    </footer>
+
+      <script>
+        var side_bar = document.querySelector(".side-bar");
+        var ham = document.getElementById("menus");
+        var close = document.getElementById("close");
+
+        ham.addEventListener("click", ()=>{
+            side_bar.classList.toggle("show-side");
+        });
+
+        close.addEventListener("click", ()=>{
+          side_bar.classList.toggle("show-side");
+        });
+
+        var nav1 = document.querySelector(".navbar1");
+        var val;
+        window.onscroll = function(){
+            if(document.documentElement.scrollTop > 20){
+                nav1.classList.add("sticky");
+            }
+            else{
+                nav1.classList.remove("sticky");
+            }
+        }
+
+        // var sOptions = document.querySelector(".s-options");
+        // var eOptions = document.querySelector(".e-options");
+        // var fOptions = document.querySelector(".f-options");
+        // var dOptions = document.querySelector(".d-options");
+        // var student = document.querySelector(".student a");
+        // var employee = document.querySelector(".employee a");
+        // var finance = document.querySelector(".finance a");
+        // var defaults = document.querySelector(".defaults a");
+
+        // student.onmouseover = function(){
+        //   sOptions.classList.remove("show");
+        // }
+        // student.onmouseout = function(){
+        //   sOptions.classList.add("show");
+        // }
+
+        // employee.onmouseover = function(){
+        //   eOptions.classList.remove("show");
+        // }
+        // employee.onmouseout = function(){
+        //   eOptions.classList.add("show");
+        // }
+
+        // finance.onmouseover = function(){
+        //   fOptions.classList.remove("show");
+        // }
+        // finance.onmouseout = function(){
+        //   fOptions.classList.add("show");
+        // }
+
+        // defaults.onmouseover = function(){
+        //   dOptions.classList.remove("show");
+        // }
+        // defaults.onmouseout = function(){
+        //   dOptions.classList.add("show");
+        // }
+
+
+      </script>
+  
+</body>
+</html>

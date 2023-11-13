@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&family=Lato:wght@300;400&family=Poppins:wght@300;400;500;600;700&family=Ubuntu:wght@300;400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', cursive;
+    font-weight: 400;
+}
+
+:root{
+    --primary-color: #000;
+    --secondary-color: rgb(0, 174, 173);
+}
+
+body{
+    /* background-image: url("Loginbackground.jpeg"); */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container1{
+    position: relative;
+    height: 100%;
+    min-height: 600px;
+}
+
+.form{
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 80px;
+}
+
+.form form{
+    background-color: rgba(0, 174, 173, 0.5);
+    color: #fff;
+    height: fit-content;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px var(--secondary-color);
+    width: 300px;
+}
+
+.form form div{
+    margin: 20px 0px;
+}
+
+form label{
+    margin-right: 30px;
+    height: 40px;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+form input{
+    border: 0;
+    outline: 0;
+    background: transparent;
+    height: 30px;
+    font-size: 16px;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    line-height: 40px;
+}
+
+form input::placeholder{
+    color: var(--secondary-color);
+}
+
+form h4{
+    text-align: center; 
+    color: #fff;
+    font-weight: 900;
+}
+
+.select select{
+    height: 40px;
+    padding: 10px;
+    width: 60%;
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    color: var(--secondary-color);
+    font-size: 16px;
+}
+
+#password{
+    width: 85%;
+}
+
+#show{
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 15px;
+    margin-left: -5px;
+    text-shadow: 0px 0px 20px var(--secondary-color);
+}
+
+#submit{
+    margin: 40px auto 20px;
+    display: block;
+    height: 30px;
+    width: 80px;
+    border-radius: 5px;
+    outline: 0;
+    border: 0;
+    background-color: rgba(255,255,255,0.5);
+    box-shadow: 0px 0px 10px rgba(255,255,255,0.5);
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+#submit:hover{
+    background-color: #fff;
+    box-shadow: 0px 0px 20px #fff;
+    color: var(--secondary-color)
+}
+
+.mentor-login:hover{
+    color: var(--secondary-color);
+}
+
+#mentor{
+    display: none;
+}
+
+#logout{
+    height: 77vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a.logout{
+    display: block;
+    height: 50px;
+    font-size: 20px;
+    padding: 10px;
+    margin: auto;
+    width: 150px;
+    cursor: pointer;
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    background-color: #fff;
+    color: var(--secondary-color);
+    font-weight: 400;
+    transition: 0.3s ease-in-out;
+    position: relative;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 6px 6px 1px -1px rgba(0, 0, 0, 0.15),
+                -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+}
+
+a.logout:hover{
+    color: #fff;
+    box-shadow: 6px 6px 1px -1px rgba(72,68,163,0.2),
+                -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+    z-index: 2;
+}
+
+a.logout:hover::before{
+    content: '';
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    background-color: var(--secondary-color);
+    color: #fff;
+    animation: btn 0.3s linear forwards;
+    border-radius: 30px;
+    opacity: 1;
+    z-index: -2;
+}
+
+@keyframes btn{
+    0%{
+        width: 0%;
+    }
+    50%{
+        width: 50%;
+    }
+    100%{
+        width: 100%;
+    }
+}

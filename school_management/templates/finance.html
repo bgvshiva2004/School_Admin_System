@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance</title>
+    <style>
+        #today{
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+        #today_fee , #today_expenditure{
+            cursor: pointer;
+        }
+        #message-container {
+            position: relative;
+            background: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            overflow: hidden;
+            width: 50%;
+        }
+        
+        #loading-bar {
+            position: absolute;
+            bottom: 0;
+            left: 100%;
+            width: 100%;
+            height: 3px; /* Set the height of the loading bar */
+            background: #0074d9; /* Set the loading bar color */
+            z-index: 1;
+        }
+        
+        #message-content {
+            z-index: 2;
+        }
+        
+        .message {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #fff;
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li id="today">Today's Finance</li>
+    </ul>
+
+    <ul id='today_finance' class='hidden'>
+        <li id='today_fee'>Fee Collection</li>
+        <li id='today_expenditure'>Expenditure</li>
+    </ul>
+
+    {% for msg in messages %}
+    <div id="message-container">
+        <div id="loading-bar"></div>
+        <div id="message-content">
+            
+                <div class="message">{{ msg }}</div>
+            
+        </div>
+    </div>
+    {% endfor %}
+
+    <form action='/today_fee_record/' method='post' class='hidden' id="feeForm">
+        {% csrf_token %}
+        <input type='hidden' name='form_type' value='fetch'>
+        {% comment %} <label>Receipt No.</label> {% endcomment %}
+        <label>Date</label>
+        <input type='date' name='date'>
+        <br></br>
+        <label for="adm-no" class="labels">Admission No.</label>
+        <input type="text" name="adm_no">
+
+        <label for="class" name="class">Class</label>
+        <select name="student_class">
+            <option value="" disabled selected>Select the Class</option>
+            <option value="nursery">Nursery</option>
+            <option value="pp-I">PP-I</option>
+            <option value="pp-II">PP-II</option>
+            <option value="I" >I</option>
+            <option value="II" >II</option>
+            <option value="III">III</option>
+            <option value="IV">IV</option>
+            <option value="V">V</option>
+            <option value="VI">VI</option>
+            <option value="VII">VII</option>
+            <option value="VIII">VIII</option>
+            <option value="IX">IX</option>
+            <option value="X">X</option>
+            <option value="XI">XI</option>
+            <option value="XII">XII</option>
+        </select>
+        <label for="section" class="labels">Section</label>
+        <input type="text" name="section">
+        <button type='submit'>Fetch Fee Details</button>
+    </form>
+
+    {% if fetch_details %}
+    <form action='/today_fee_record/' method='post'>
+        {% csrf_token %}
+        <input type='hidden' name='form_type' value='fill'>
+        <label for="student_name" class="labels">Student Name: </label>{{fetch_details.student_name}}<br></br>                                                                                                                                  
+        <label for="total_fee" class="labels">Total fee</label>{{fetch_details.total_fee}}<br></br>  
+        <label for="balance_fee" class="labels">Balance Fee</label>{{fetch_details.balance_fee}}<br></br>  
+        <label for="fee_paid" class="labels">Fee Paid</label> 
+        <input type= 'number' name='fee_paid'>                                          
+        <button type='submit'>Submit</button>
+    </form>
+    {% endif %}
+
+    <form action='/today_expenditure/' method='post' class="hidden" id="expenditureForm">
+        {% csrf_token %}
+        <label>Date</label>
+        <input type='date' name='date'>
+        <label>Purpose</label>
+        <input type='text' placeholder='Specify the Purpose of Expenditure' name='purpose'>
+        <label>Amount</label>
+        <input type='number' name='amount'>
+        <button type='submit'>Add Expenditure</button>
+    </form>
+    {{error_message}}
+    <script>
+        const todayFinance = document.getElementById('today');
+        const list = document.getElementById('today_finance');
+        const feeCollection = document.getElementById('today_fee');
+        const expenditure = document.getElementById('today_expenditure');
+        const feeForm = document.getElementById('feeForm');
+        const expenditureForm = document.getElementById('expenditureForm');
+
+        todayFinance.addEventListener('click', () => {
+            feeForm.classList.add('hidden');
+            expenditureForm.classList.add('hidden');
+            list.classList.remove('hidden');
+        });
+
+        feeCollection.addEventListener('click', () => {
+            feeForm.classList.remove('hidden');
+            expenditureForm.classList.add('hidden');
+        });
+
+        expenditure.addEventListener('click', () => {
+            feeForm.classList.add('hidden');
+            expenditureForm.classList.remove('hidden');
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var loadingBar = document.getElementById("loading-bar");
+            var messageContainer = document.getElementById("message-container");
+        
+            // Animate the loading bar
+            var width = 100;
+            var interval = setInterval(function () {
+                if (width <= 0) {
+                    clearInterval(interval);
+                    // Hide the message container
+                    messageContainer.style.display = "none";
+                } else {
+                    width -= 1;
+                    loadingBar.style.left = width + "%";
+                }
+            }, 25); // Adjust the speed of the loading bar animation by changing the interval duration
+        });
+        
+    </script>
+</body>
+</html>

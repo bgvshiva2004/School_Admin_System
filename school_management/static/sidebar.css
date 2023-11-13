@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&family=Lato:wght@300;400&family=Poppins:wght@300;400;500;600;700&family=Ubuntu:wght@300;400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', cursive;
+    font-weight: 400;
+}
+
+:root{
+    --primary-color: #000;
+    --secondary-color: rgb(0, 174, 173);
+}
+
+.side{
+    width: 25%;
+    position: fixed;
+    height: 100%;
+    right: 0;
+    bottom: 0;
+    top: 80px;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    padding-top: 120px;
+    /* z-index: -1; */
+}
+
+.side ul{
+    position: relative;
+    padding-right: 10px;
+    margin-top: -80px;
+}
+
+.side ul li{
+    list-style-type: none;
+    color: #fff;
+    line-height: 50px;
+    font-size: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.side ul li:hover{
+    color: var(--secondary-color);
+}
+
+#existing_employee_options{
+    position: absolute;
+    /* top: 120px; */
+    bottom: 20%;
+    list-style-type: none;
+    font-size: 18px;
+    line-height: 30px;
+    color: var(--secondary-color);
+    left: 30%;
+}
+
+#existing_employee_options li{
+    margin-bottom: 10px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+#existing_employee_options li:hover{
+    color: #fff;
+}
+
+#options{
+    position: absolute;
+    top: 25%;
+    /* list-style-type: none; */
+    font-size: 18px;
+    line-height: 30px;
+    color: var(--secondary-color);
+    left: 20%;
+}
+
+#options li{
+    margin-bottom: 10px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+#options li:hover{
+    color: #fff;
+}

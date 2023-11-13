@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "main.css" %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/0ceeca1f1f.js" crossorigin="anonymous"></script>
+    <title>Student Life</title>
+</head>
+<body>
+    
+    <div class="navbar1">
+        <div class="hamburger1" id="menus"><i class="fa-solid fa-bars"></i></div>
+        <div class="school_title">
+            <a href="{% url "index" %}"><h3 style="font-size: 40px;">Champ School</h3></a>
+        </div>
+        <div>
+          <a href="{% url "login" %}" class="login">
+            <div class="Login">
+              <i class="fa-solid fa-user"></i>
+            </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="side-bar">
+        <div id="close"><i class="fa-solid fa-xmark"></i></div>
+        <ul>
+          <li><a href="{% url "index" %}">Home</a></li>
+          <li><a href="admission.html">Admission</a></li>
+          <li><a href="{% url "academics" %}">Academics</a></li>
+          <li><a href="{% url "life" %}">Student Life</a></li>
+          <li><a href="about.html">About Us</a></li>
+          {% if user.is_authenticated %}
+          <li><a href="{% url "logout" %}">Logout</a></li>
+          {% else %}
+          <li><a href="{% url "login" %}">Login</a></li>
+          {% endif %}
+        </ul>
+    </div>
+
+    <div class="nav1">
+      <div class="navigation">
+        <a href="{% url "index" %}"><h5>Home</h5></a>
+        <h5> - Student Life</h5>
+      </div>
+      <div class="rightnav">
+        <a href="#cbse"><h5>CBSE</h5></a>
+        <a href="#ci"><h5>CI</h5></a>
+        <a href="#pedagogy"><h5>Pedagogy</h5></a>
+        <a href="#placements"><h5>Placements</h5></a>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer">
+        <div class="info">
+          <h3>International School</h3>
+          <ul>
+            <li><i class="fa-solid fa-house"></i><p>Village Horawalla, Near Sahaspur<br/>
+              Dehradun - 248197, Uttarakahnd, India</p></li>
+            <li><i class="fa-solid fa-envelope"></i><p>international@gmail.com</p></li>
+            <li><i class="fa-solid fa-phone"></i><p>+91 9876543210</p></li>
+          </ul>
+        </div>
+        <div class="social">
+          <ul>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+          </ul>
+        </div>
+        <div class="footerform">
+          <form>
+            <h4>Enquiry Form</h4>
+            <input type="text" placeholder="Name" id="contact-name" value="">
+            <input type="email" placeholder="Email" id="contact-email" value="">
+            <input type="text" placeholder="Phone" id="contact-phone" value="">
+            <button type="submit" id="contact-submit">Submit</button>
+          </form>
+        </div>
+      </div>
+      
+    </footer>
+
+
+    <script>
+        var side_bar = document.querySelector(".side-bar");
+        var ham = document.getElementById("menus");
+        var close = document.getElementById("close");
+
+        ham.addEventListener("click", ()=>{
+            side_bar.classList.toggle("show-side");
+        });
+
+        close.addEventListener("click", ()=>{
+        side_bar.classList.toggle("show-side");
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

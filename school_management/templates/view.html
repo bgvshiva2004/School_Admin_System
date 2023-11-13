@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View</title>
+    <style>
+        #classwise_list{
+            display:none;
+        }
+        #student_details_form{
+            display:none;
+        }
+        #employee_details_form{
+            display:none;
+        }
+        .headings , #past_finance{
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+          }
+        
+          table, th, td {
+            border: 1px solid #aaa;
+          }
+        
+          th, td {
+            padding: 8px;
+            text-align: left;
+          }
+        
+          th {
+            background-color: #f2f2f2;
+          }
+        
+          tr:nth-child(even) {
+            background-color: #f2f2f2;
+          }
+        
+          tr:nth-child(odd) {
+            background-color: #fff;
+          }
+          #finance_list{
+            display:none;
+          }
+          #fee_date,#expenditure_date{
+            display:none;
+          }
+          #fee,#expenditure{
+            cursor: pointer;
+          }
+          #message-container {
+            position: relative;
+            background: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            overflow: hidden;
+            width: 50%;
+        }
+        
+        #loading-bar {
+            position: absolute;
+            bottom: 0;
+            left: 100%;
+            width: 100%;
+            height: 3px; /* Set the height of the loading bar */
+            background: #0074d9; /* Set the loading bar color */
+            z-index: 1;
+            {% comment %} transition: left 5s ease-in; {% endcomment %}
+        }
+        
+        #message-content {
+            z-index: 2;
+        }
+        
+        .message {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #fff;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+ 
+    <p class="headings" id='classwise_student_list'>ClassWise Students List</p>
+    <form action='/classwise_students/' method='post' id='classwise_list'>
+      {% csrf_token %}
+      <label for="class" name="class">Class</label>
+      <select name="student_class">
+          <option value="" disabled selected>Select the Class</option>
+          <option value="nursery">Nursery</option>
+          <option value="pp-I">PP-I</option>
+          <option value="pp-II">PP-II</option>
+          <option value="I" >I</option>
+          <option value="II" >II</option>
+          <option value="III">III</option>
+          <option value="IV">IV</option>
+          <option value="V">V</option>
+          <option value="VI">VI</option>
+          <option value="VII">VII</option>
+          <option value="VIII">VIII</option>
+          <option value="IX">IX</option>
+          <option value="X">X</option>
+          <option value="XI">XI</option>
+          <option value="XII">XII</option>
+      </select>
+      <br></br>
+      <label for="section" class="labels">Section</label>
+      <input type="text" name="section">
+      <button type='submit'>View List</button>
+  </form>
+
+    <p class="headings" id='student_complete_details'>Student Particulars</p>
+    <form action="/get_student_details/" method="post" id="student_details_form">
+        {% csrf_token %}
+        <label for="adm_no">Enter Admission Number:</label>
+        <input type="text" name="adm_no" required>
+        <button type="submit">Get Student Details</button>
+      </form>
+
+    <p class="headings" id='employee_details'>Employee Particulars</p>
+    <form method="post" action="/get_employee_details/" id='employee_details_form'>
+        {% csrf_token %}
+        <label for="employee_id">Enter Employee ID:</label>
+        <input type="text" name="employee_id" required>
+        <button type="submit">Get Employee Details</button>
+    </form>
+
+    <p class="headings" id='past_finance'>Past Finance</p>
+    <ul id='finance_list'>
+      <li id='fee'>Fee Records</li>
+      <li id='expenditure'>Expenditures</li>
+    </ul>
+    
+    {% for msg in messages %}
+    <div id="message-container">
+        <div id="loading-bar"></div>
+        <div id="message-content">
+            
+                <div class="message">{{ msg }}</div>
+            
+        </div>
+    </div>
+    {% endfor %}
+
+    <form action='/past_fee_records/' method='post' id='fee_date'>
+      {% csrf_token %}
+      <label>Date</label>
+      <input type='date' name='date'>
+      <button type='submit'>View Fee Records</button>
+    </form>
+
+    <form action='/past_expenditure_records/' method='post' id='expenditure_date'>
+      {% csrf_token %}
+      <label>Date</label>
+      <input type='date' name='date'>
+      <button type='submit'>View Expenses</button>
+    </form>
+
+  {% if list %}
+    <table id= "classwise_table">
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Section</th>
+            <th>Admission No</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Gender</th>
+            <th>Date of Birth</th>
+            <th>Aadhar</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for student in list %}
+            <tr>
+              <td>{{ student.student_class }}</td>
+              <td>{{ student.section }}</td>
+              <td>{{ student.adm_no }}</td>
+              <td>{{ student.first_name }}</td>
+              <td>{{ student.last_name }}</td>
+              <td>{{ student.gender }}</td>
+              <td>{{ student.dob }}</td>
+              <td>{{ student.aadhar }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+
+    
+    
+  {% if student %}
+        <table>
+            <tr>
+            <th>Admission No</th>
+            <td>{{ student.adm_no }}</td>
+            </tr>
+            <tr>
+            <th>First Name</th>
+            <td>{{ student.first_name }}</td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td>{{ student.last_name }}</td>
+              </tr>
+              <tr>
+                <th>Gender</th>
+                <td>{{ student.gender }}</td>
+              </tr>
+              <tr>
+                <th>Date of Birth</th>
+                <td>{{ student.dob }}</td>
+              </tr>
+              <tr>
+                <th>Aadhar</th>
+                <td>{{ student.aadhar }}</td>
+              </tr>
+              <tr>
+                <th>Class</th>
+                <td>{{ student.student_class }}</td>
+              </tr>
+              <tr>
+                <th>Section</th>
+                <td>{{ student.section }}</td>
+              </tr>
+              <tr>
+                <th>Mother Tongue</th>
+                <td>{{ student.mother_tongue }}</td>
+              </tr>
+              <tr>
+                <th>Father's Name</th>
+                <td>{{ student.father_name }}</td>
+              </tr>
+              <tr>
+                <th>Father's Occupation</th>
+                <td>{{ student.father_occupation }}</td>
+              </tr>
+              <tr>
+                <th>Mother's Name</th>
+                <td>{{ student.mother_name }}</td>
+              </tr>
+              <tr>
+                <th>Mother's Occupation</th>
+                <td>{{ student.mother_occupation }}</td>
+              </tr>
+              <tr>
+                <th>Contact</th>
+                <td>{{ student.contact }}</td>
+              </tr>
+              <tr>
+                <th>Address</th>
+                <td>{{ student.address }}</td>
+              </tr>
+        </table>
+
+     {% endif %}
+
+  {% if employee %}
+        <table>
+            <tr>
+                <td>Employee ID</td>
+                <td>{{ employee.employee_id }}</td>
+            </tr>
+            <tr>
+                <td>First Name</td>
+                <td>{{ employee.first_name }}</td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td>{{ employee.last_name }}</td>
+            </tr>
+            <tr>
+                <td>Qualification</td>
+                <td>{{ employee.qualification }}</td>
+            </tr>
+            <tr>
+                <td>Experience</td>
+                <td>{{ employee.experience }}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{ employee.email }}</td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td>{{ employee.contact }}</td>
+            </tr>
+            <tr>
+                <td>Work Type</td>
+                <td>{{ employee.work_type }}</td>
+            </tr>
+            <tr>
+                <td>Working Hours</td>
+                <td>{{ employee.working_hours }}</td>
+            </tr>
+            <tr>
+                <td>Subject ID</td>
+                <td>{{ employee.subject_id }}</td>
+            </tr>
+            <tr>
+                <td>Subject</td>
+                <td>{{ employee.subject }}</td>
+            </tr>
+            <tr>
+                <td>Role</td>
+                <td>{{ employee.role }}</td>
+            </tr>
+            <tr>
+                <td>Account No</td>
+                <td>{{ employee.account_no }}</td>
+            </tr>
+            <tr>
+                <td>Bank</td>
+                <td>{{ employee.bank }}</td>
+            </tr>
+            <tr>
+                <td>IFSC Code</td>
+                <td>{{ employee.ifsc_code }}</td>
+            </tr>
+            <tr>
+                <td>Salary</td>
+                <td>{{ employee.salary }}</td>
+            </tr>
+        </table>
+        {% endif %}
+
+   
+ {% if fee_record %}
+    <table>
+      <thead>
+          <tr>
+              <th>Receipt No</th>
+              <th>Date</th>
+              <th>Admission No</th>
+              <th>Student Name</th>
+              <th>Student Class</th>
+              <th>Section</th>
+              <th>Fee Paid</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for record in fee_record %}
+          <tr>
+              <td>{{ record.receipt_no }}</td>
+              <td>{{ record.date }}</td>
+              <td>{{ record.adm_no.adm_no }}</td>
+              <td>{{ record.student_name }}</td>
+              <td>{{ record.student_class }}</td>
+              <td>{{ record.section }}</td>
+              <td>{{ record.fee_paid }}</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+  {% endif %}
+
+    
+ {% if expenditure_record %}
+    <table>
+      <thead>
+          <tr>
+              <th>Date</th>
+              <th>Purpose</th>
+              <th>Amount</th>
+          </tr>
+      </thead>
+      <tbody>
+              {% for record in expenditure_record %}
+                  <tr>
+                      <td>{{ record.date }}</td>
+                      <td>{{ record.purpose }}</td>
+                      <td>{{ record.amount }}</td>
+                  </tr>
+              {% endfor %}
+      </tbody>
+  </table>
+  {% endif %}
+
+  <script>
+        const classwise_student_list = document.getElementById('classwise_student_list');
+        const classwise_list= document.getElementById('classwise_list');
+        const past_finance = document.getElementById('past_finance');
+        const finance_list = document.getElementById('finance_list');
+        const fee = document.getElementById('fee');
+        const fee_date = document.getElementById('fee_date');
+        const expenditure = document.getElementById('expenditure');
+        const expenditure_date = document.getElementById('expenditure_date');
+
+
+        const student_complete_details=document.getElementById('student_complete_details');
+        const student_details_form = document.getElementById('student_details_form');
+
+        const employee_details =document.getElementById('employee_details');
+        const employee_details_form=document.getElementById('employee_details_form');
+
+        classwise_student_list.addEventListener('click',function(){
+          fee_date.style.display = 'none';
+          expenditure_date.style.display = 'none';
+            student_details_form.style.display = 'none';
+            employee_details_form.style.display = 'none';
+            finance_list.style.display = 'none';
+            classwise_list.style.display = 'block';
+        });
+
+        student_complete_details.addEventListener('click',function(){
+          fee_date.style.display = 'none';
+          expenditure_date.style.display = 'none';
+            classwise_list.style.display = 'none';
+            employee_details_form.style.display = 'none';
+            finance_list.style.display = 'none';
+            student_details_form.style.display = 'block';
+        });
+
+        employee_details.addEventListener('click',function(){
+          fee_date.style.display = 'none';
+          expenditure_date.style.display = 'none';
+            classwise_list.style.display = 'none';
+            student_details_form.style.display = 'none';
+            finance_list.style.display = 'none';
+            employee_details_form.style.display = 'block';
+        });
+
+        past_finance.addEventListener('click',function(){
+          classwise_list.style.display = 'none';
+          student_details_form.style.display = 'none';
+          employee_details_form.style.display = 'none';
+          fee_date.style.display = 'none';
+          expenditure_date.style.display = 'none';
+          finance_list.style.display = 'block';
+        });
+
+        fee.addEventListener('click',function(){
+          expenditure_date.style.display = 'none';
+          fee_date.style.display = 'block';
+        });
+        expenditure.addEventListener('click',function(){
+          fee_date.style.display = 'none';
+          expenditure_date.style.display = 'block';
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+          var loadingBar = document.getElementById("loading-bar");
+          var messageContainer = document.getElementById("message-container");
+      
+          // Animate the loading bar
+          var width = 100;
+          var interval = setInterval(function () {
+              if (width <= 0) {
+                  clearInterval(interval);
+                  // Hide the message container
+                  messageContainer.style.display = "none";
+              } else {
+                  width -= 1;
+                  loadingBar.style.left = width + "%";
+              }
+          }, 25); // Adjust the speed of the loading bar animation by changing the interval duration
+      });
+
+    </script>
+</body>
+</html>

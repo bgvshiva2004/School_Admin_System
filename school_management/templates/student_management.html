@@ -1,0 +1,643 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "main.css" %}">
+    <link rel="stylesheet" href="{% static "form.css" %}">
+    <link rel="stylesheet" href="{% static "sidebar.css" %}">
+    <script src="https://kit.fontawesome.com/0ceeca1f1f.js" crossorigin="anonymous"></script>
+    <title>Student Management</title>
+    <style>
+        #new_enrollment_details{
+            display:none;
+        }
+        #fee_details{
+            display:none;
+        }
+        #new_enrollment{
+            cursor: pointer;
+        }
+        #fee{
+            cursor: pointer;
+        }
+        #grades-entry,#activities{
+            cursor: pointer;
+        }
+        #academic_grades,#cc_form{
+            display:none;
+        }
+        #existing_student{
+            cursor: pointer;
+        }
+        #options{
+            display:none;
+        }
+        #academic_grades p{
+            font-size: 20px; 
+            color: rgb(0, 174, 173); 
+            text-align: center; 
+            line-height: 80px;
+        }
+        #academic_grades p span{
+            color: #000;
+        }
+        #academic_grades .start{
+            width: 60%; 
+            margin: 10px auto;
+            display: flex;
+            align-items: center;
+        }
+        #message-container {
+            position: relative;
+            background: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            overflow: hidden;
+            width: 50%;
+        }
+        
+        #loading-bar {
+            position: absolute;
+            bottom: 0;
+            left: 100%;
+            width: 100%;
+            height: 3px; /* Set the height of the loading bar */
+            background: #0074d9; /* Set the loading bar color */
+            z-index: 1;
+            {% comment %} transition: left 5s ease-in; {% endcomment %}
+        }
+        
+        #message-content {
+            z-index: 2;
+        }
+        
+        .message {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #fff;
+            margin-bottom: 10px;
+        }
+        #revise_student_details_form{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction:column;
+        }
+        .double{
+            margin-bottom: 30px;
+        }
+        #fee_entry_form{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction:column;
+        }
+        .single{
+            width: 60%;
+            display: block;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar1">
+        <div class="hamburger1" id="menus"><i class="fa-solid fa-bars"></i></div>
+        <div class="school_title">
+            <a href="{% url "index" %}"><h3 style="font-size: 40px;">Champ School</h3></a>
+        </div>
+        <div>
+          <a href="{% url "login" %}" class="login">
+            <div class="Login">
+              <i class="fa-solid fa-user"></i>
+            </div>
+        </a>
+      </div>
+      </div>
+
+      <div class="side-bar">
+        <div id="close"><i class="fa-solid fa-xmark"></i></div>
+        <ul>
+          <li><a href="{% url "index" %}">Home</a></li>
+          <li><a href="admission.html">Admission</a></li>
+          <li><a href="{% url "academics" %}">Academics</a></li>
+          <li><a href="{% url "life" %}">Student Life</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="{% url "login" %}">Login</a></li>
+        </ul>
+    </div>
+
+    <div class="side">
+        <ul>
+            <li id="new_enrollment">New Enrollment</li>
+            <li id="existing_student">Existing Student</li>        
+        </ul>
+        <div id="options">
+            <li id="modify_details">Revise Personal details</li>
+            <li id="fee">Fee details</li>
+            <li id="grades-entry">Grades entry</li>
+            <li id="activities">Cocurricular Performance</li>
+        </div>
+    </div>
+
+    {% for msg in messages %}
+    <div id="message-container">
+        <div id="loading-bar"></div>
+        <div id="message-content">
+            
+                <div class="message">{{ msg }}</div>
+            
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="main">
+        <div class="form">
+            <form action='/new_student/' method="post" id="new_enrollment_details">
+                <h4>New Enrollment!</h4>
+                {% csrf_token %}
+                <div>
+                    <div>
+                        <label for="adm-no" class="labels">Admission No.</label>
+                        <input type="text" name="adm_no">
+                    </div>
+                    <div>
+                        <label for="first-name" class="labels">First Name</label>
+                        <input type="text" name="first_name">
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label for="last-name" class="labels">Last Name</label>
+                        <input type="text" name="last_name">
+                    </div>
+                    <div>
+                        <label for="gender" class="labels select-label">Gender</label>
+                        <select name="gender">
+                            <option value="" disabled selected>Select the Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label for="DOB" class="labels">DOB</label>
+                        <input type="date" name="dob"></input>
+                    </div>
+                    <div>
+                        <label for="aadhar" class="labels">Aadhar No.</label>
+                        <input type="number" name="aadhar"></input>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label for="class" name="class" class="select-label">Class</label>
+                        <select name="student_class">
+                            <option value="" disabled selected>Select the Class</option>
+                            <option value="nursery">Nursery</option>
+                            <option value="pp-I">PP-I</option>
+                            <option value="pp-II">PP-II</option>
+                            <option value="I" >I</option>
+                            <option value="II" >II</option>
+                            <option value="III">III</option>
+                            <option value="IV">IV</option>
+                            <option value="V">V</option>
+                            <option value="VI">VI</option>
+                            <option value="VII">VII</option>
+                            <option value="VIII">VIII</option>
+                            <option value="IX">IX</option>
+                            <option value="X">X</option>
+                            <option value="XI">XI</option>
+                            <option value="XII">XII</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="section" class="labels">Section</label>
+                        <input type="text" name="section">
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label for="mother-tongue" class="labels">Mother Tongue</label>
+                        <input type="text" name="mother_tongue">
+                    </div>
+                    <div>
+                        <label for="father-name" class="labels">Father Name</label>
+                        <input type="text" name="father_name">
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label for="father-occupation" class="labels">Father occupation</label>
+                        <input type="text" name="father_occupation">
+                    </div>
+                    <div>
+                        <label for="mother-name" class="labels">Mother Name</label>
+                        <input type="text" name="mother_name">
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label for="mother-occupation" class="labels">Mother occupation</label>
+                        <input type="text" name="mother_occupation">
+                    </div>
+                    <div>
+                        <label for="contacts" class="labels">Contact</label>
+                        <input type="number" name="contact"></input>
+                    </div>
+                </div>
+                <div class="last">
+                    <label for="address" class="labels">Address</label>
+                    <input type="address" name="address">
+                </div>  
+                <button type="submit">Enroll</button>
+            </form>
+        </div>
+
+        <div id="existing_student_info">  
+            <form action='/modify_student_details/' method='post' style="display: none" id='modify_details_form'>
+                {% csrf_token %}
+                <input type='hidden' name='form_type' value='fetch'>
+                <h4>Revise Personal Details</h4>
+                <div class="single">
+                    <label for="adm-no" class="labels">Admission No.</label>
+                    <input type="text" name="adm_no">
+                </div>
+                <button type='submit'>Fetch Details</button>
+            </form>
+        
+            {% if student_details %}
+            <form action='/modify_student_details/' method='post' id = 'revise_student_details_form'>
+                {% csrf_token %}
+                <input type='hidden' name='form_type' value='fill'>
+                <h4>Revise Personal Details</h4>
+                <div class='double'>
+                    <div>
+                <label for="first_name">First Name</label>
+                <input type="text" name="first_name" placeholder={{student_details.first_name }}>
+            </div>
+             <div>
+                <label for="last_name">Last Name</label>
+                <input type="text" name="last_name" placeholder={{ student_details.last_name }}>
+            </div>
+            </div>
+                <div  class='double'>
+                    <div>
+                <label for="gender">Gender</label>
+                <input type="text" name="gender" placeholder={{ student_details.gender }}>
+            </div>
+                <div>
+                <label for="dob">Date of Birth</label>
+                <input type="text" name="dob" placeholder={{ student_details.dob }}>
+            </div>
+            </div>
+                <div  class='double'>
+                    <div>
+                <label for="aadhar">Aadhar Number</label>
+                <input type="text" name="aadhar" placeholder={{ student_details.aadhar }}>
+            </div>
+                <div>
+                <label for="student_class">Class</label>
+                <input type="text" name="student_class" placeholder={{ student_details.student_class }}>
+            </div>
+            </div>
+                <div  class='double'>
+                    <div>
+                <label for="section">Section</label>
+                <input type="text" name="section" placeholder={{ student_details.section }}>
+            </div>
+                <div>
+                <label for="mother_tongue">Mother Tongue</label>
+                <input type="text" name="mother_tongue" placeholder={{ student_details.mother_tongue }}>
+            </div>
+            </div>
+                <div  class='double'>
+                    <div>
+                <label for="father_name">Father's Name</label>
+                <input type="text" name="father_name" placeholder={{ student_details.father_name }}>
+            </div>
+            <div>
+                <label for="father_occupation">Father's Occupation</label>
+                <input type="text" name="father_occupation" placeholder={{ student_details.father_occupation }}>
+            </div>
+            </div>
+            <div  class='double'>
+                <div>
+                <label for="mother_name">Mother's Name</label>
+                <input type="text" name="mother_name" placeholder={{ student_details.mother_name }}>
+            </div>
+                <div>
+                <label for="mother_occupation">Mother's Occupation</label>
+                <input type="text" name="mother_occupation" placeholder={{ student_details.mother_occupation }}>
+            </div>
+            </div>
+                <div  class='double'>
+                    <div>
+                <label for="contact">Contact</label>
+                <input type="text" name="contact" placeholder={{ student_details.contact }}>
+            </div>
+                <div>
+                <label for="address">Address</label>
+                <input type="text" name="address" placeholder={{ student_details.address }}>
+            </div>
+            </div>
+            
+            <button type='submit'>Save Changes</button>
+            </form>
+            {% endif %}
+
+            <form action="/fee/" method="post" id="fee_details">
+                {% csrf_token %}
+                <input type='hidden' name='form_type' value='fetch'>
+                <h4>Existing Student Information</h4>
+                <div>
+                    <label for="adm-no" class="labels">Admission No.</label>
+                    <input type="text" name="adm_no">
+                </div>
+                <div>
+                    <label for="class" name="class">Class</label>
+                    <select name="student_class">
+                    <option value="" disabled selected>Select the Class</option>
+                    <option value="nursery">Nursery</option>
+                    <option value="pp-I">PP-I</option>
+                    <option value="pp-II">PP-II</option>
+                    <option value="I" >I</option>
+                    <option value="II" >II</option>
+                    <option value="III">III</option>
+                    <option value="IV">IV</option>
+                    <option value="V">V</option>
+                    <option value="VI">VI</option>
+                    <option value="VII">VII</option>
+                    <option value="VIII">VIII</option>
+                    <option value="IX">IX</option>
+                    <option value="X">X</option>
+                    <option value="XI">XI</option>
+                    <option value="XII">XII</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="section" class="labels">Section</label>
+                    <input type="text" name="section">
+                </div>
+                <button type='submit'>Fetch Details</button>
+            </form>
+            
+            {% if fetch_details %}
+            <form action="/fee/" method="post" id='fetch_fill' id = "fee_entry_form" style="display:none;">
+                {% csrf_token %}
+                <input type='hidden' name='form_type' value='fill'> 
+            <div class="double">
+                <div>
+                <label for="student_name" class="labels">Student: </label>
+                <input disabled placeholder={{fetch_details.student_name}} > 
+            </div>
+            <div>
+                <label for="tuition-fee" class="labels">Tuition Fee: </label>
+                <input disabled placeholder= {{fetch_details.tuition_fee}}> 
+            </div>
+            </div>
+            <div class="double">
+                <div>
+                <label for="exam-fee" class="labels">Exam Fee: </label>
+                <input disabled placeholder={{fetch_details.exam_fee}}>
+            </div>
+                <div>
+                <label for="misc-fee" class="labels">Miscellaneous Fee: </label>
+                <input disabled placeholder={{fetch_details.miscellaneous_fee}}>
+            </div>
+            </div>
+            <div class="double">
+                <div>
+                <label for="area_id" class="labels">Area_id (if transport facility is availed)</label>
+                <input type="text" name="area_id" placeholder="Enter 0 and press ADD if transport isn't availed">
+            </div>
+                <div>
+                <label for="fee-concession" class="labels">Fee Concession</label>
+                <input type="number" name="fee_concession">
+            </div>
+            </div>
+            <div class="double">
+                <div>
+                <label for="total-fee" class="labels">Total Fee</label>
+                <input type="number" name="total_fee">
+            </div>
+           
+
+                <!-- {% comment %} till here...have to retrive the data from the fee table through class id {% endcomment %} -->
+            <div>
+                <label for="fee-paid" class="labels">Fee Paid</label>
+                <input type="number" name="fee_paid">
+            </div>
+            </div>
+            <div class="single">
+                <label for="balance-fee" class="labels">Balance Fee</label>
+                <input type="number" name="balance_fee">
+            </div>
+                <button type='submit'>Update</button>
+            </form>
+            {% endif %}
+
+            <form action="/academic_grades/" method="post" id="academic_grades">
+                    <!-- {% csrf_token %} -->
+                    <h4 style="margin-bottom: 50px;">Academic Grades</h4>
+
+                    <div class="start">
+                        <label for="adm-no" class="labels">Admission No.</label>
+                        <input type="text" name="adm_no">
+                    </div>
+                    <!-- {% comment %}  -->
+                    <p>Student Name: <span>{{first_name}}</span></p>
+                    <!-- {% endcomment %} -->
+                    <div>
+                        <div>
+                            <label for="acd-yr" class="labels">Academic Year</label>
+                            <input type="text" name="academic_year">
+                        </div>
+                        <div>
+                            <label for="exam" class="labels">Assessment Name</label>
+                            <input type="text" name="assessment_name">
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="1st-language" class="labels">1st language</label>
+                            <input type="number" name="first_language">
+                        </div>
+                        <div>
+                            <label for="2nd-language" class="labels">2nd language</label>
+                            <input type="number" name="second_language">
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="3rd-language" class="labels">3rd language</label>
+                            <input type="number" name="third_language">
+                        </div>
+                        <div>
+                            <label for="maths" class="labels">Mathematics</label>
+                            <input type="number" name="mathematics">
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="science" class="labels">Science</label>
+                            <input type="number" name="science">
+                        </div>
+                        <div>
+                            <label for="social" class="labels">Social</label>
+                            <input type="number" name="social">
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label for="computers" class="labels">Computers</label>
+                            <input type="number" name="computers">
+                        </div>
+                        <div>
+                            <label for="overall-grade" class="labels">Overall Grade</label>
+                            <input type="number" name="overall_grade">
+                        </div>
+                    </div>
+                    <button>Update</button>
+            </form>
+            
+
+            <form action="/cocurricular_performance/" method="post" id='cc_form'>
+                <!-- {% csrf_token %} -->
+                <input type='hidden' name='form_type' value='fetch'>
+                <h4>Cocurricular Performance</h4>
+                <div>
+                    <label for="adm-no" class="labels">Admission No.</label>
+                    <input type="text" name="adm_no">
+                </div>
+                <button type='submit'>Fetch Details</button>
+            </form>
+
+            <!-- {% if details_for_cc %} -->
+            <form action="/cocurricular_performance/" method="post" style="display: none;">
+                <input type='hidden' name='form_type' value='fill'>
+                {% csrf_token %}
+                <label>Student: </label>{{details_for_cc.student_name}}<br></br>
+                <label>Class: </label>{{details_for_cc.student_class}}<br></br>
+                <label>Section: </label>{{details_for_cc.section}}<br></br>
+                <label>Activity-Id</label>
+                <input type='text' name='activity_id'><br></br>
+                <label>Performance Remark</label>
+                <input type='text' name='performance_remark'>
+                <button type='submit'>Add</button>
+            </form>
+            <!-- {% endif %} -->
+        </div>
+    </div>
+    <footer>
+        <div class="footer">
+        <div class="info">
+            <h4>Champ School</h4>
+        </div>
+        <div class="social">
+            <ul>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+            </ul>
+        </div>
+        <div class="rights">
+            <p><i class="fa-solid fa-copyright"></i> Copyrights reserved.</p>
+        </div>
+        </div>
+        
+    
+    </footer>
+    
+    <script>
+
+        var side_bar = document.querySelector(".side-bar");
+        var ham = document.getElementById("menus");
+        var close = document.getElementById("close");
+
+        ham.addEventListener("click", ()=>{
+            side_bar.classList.toggle("show-side");
+        });
+
+        close.addEventListener("click", ()=>{
+          side_bar.classList.toggle("show-side");
+        });
+
+        var nav1 = document.querySelector(".navbar1");
+        var val;
+        window.onscroll = function(){
+            if(document.documentElement.scrollTop > 20){
+                nav1.classList.add("sticky");
+            }
+            else{
+                nav1.classList.remove("sticky");
+            }
+        }
+
+        const newEnrollment = document.getElementById('new_enrollment');
+        const newEnrollmentDetails = document.getElementById('new_enrollment_details');
+        const existingStudent = document.getElementById('existing_student');
+        const options = document.getElementById('options');
+        const fee = document.getElementById('fee');
+        const feeDetails = document.getElementById('fee_details');
+        const grades = document.getElementById('grades-entry');
+        const academicGrades = document.getElementById('academic_grades');
+        const fetch_fill= document.getElementById('fetch_fill');
+        const cc_form = document.getElementById('cc_form');
+        const activities= document.getElementById('activities');
+        const modify_details_form = document.getElementById('modify_details_form');
+        const modify_details = document.getElementById('modify_details');
+
+        function hideAllForms() {
+            newEnrollmentDetails.style.display = 'none';
+            options.style.display = 'none';
+            feeDetails.style.display = 'none';
+            academicGrades.style.display = 'none';
+            cc_form.style.display = 'none';
+            modify_details_form.style.display = 'none';
+        }
+
+        modify_details.addEventListener('click',function(){
+            hideAllForms();
+            options.style.display = 'block';
+            modify_details_form.style.display = 'block';
+        });
+
+        newEnrollment.addEventListener('click', function () {
+            hideAllForms();
+            newEnrollmentDetails.style.display = 'block';
+        });
+
+        existingStudent.addEventListener('click', function () {
+            hideAllForms();
+            options.style.display = 'block';
+        });
+
+        fee.addEventListener('click', function () {
+            hideAllForms();
+            options.style.display = 'block';
+            feeDetails.style.display = 'block';
+        });
+
+        grades.addEventListener('click', function () {
+            hideAllForms();
+            options.style.display = 'block';
+            academicGrades.style.display = 'block';
+        });
+
+        activities.addEventListener('click',function(){
+            hideAllForms();
+            options.style.display = 'block';
+            cc_form.style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>

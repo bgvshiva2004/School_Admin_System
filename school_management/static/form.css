@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;500;600;700&family=Lato:wght@300;400&family=Poppins:wght@300;400;500;600;700&family=Ubuntu:wght@300;400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Ubuntu', cursive;
+    font-weight: 400;
+}
+
+:root{
+    --primary-color: #000;
+    --secondary-color: rgb(0, 174, 173);
+}
+
+body{
+    background: rgba(0, 174, 173, 0.15);
+}
+
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120vh;
+    /* padding-right: 30%; */
+    padding-left: 5vw;
+    /* background: rgba(0, 174, 173, 0.15); */
+    margin-right: 25%;
+}
+
+.main form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+}
+
+.main form h4{
+    font-size: 30px;
+    color: var(--primary-color);
+    text-align: center;
+    position: relative;
+    margin: 20px 0px 40px 0px;
+}
+
+.main form h4::after{
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 40%;
+    width: 20%;
+    height: 3px;
+    border-radius: 10px;
+    background-color: var(--secondary-color);
+}
+
+.main form div{
+    display: flex;
+    margin: 10px auto;
+    flex-direction: row;
+}
+
+.main form div div{
+    margin-right: 50px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+}
+
+.main form div div label{
+    width: 40%;
+    color: var(--primary-color);
+    font-size: 18px;
+}
+
+.main form div div select{
+    height: 40px;
+    padding: 10px;
+    width: 80%;
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    color: var(--secondary-color);
+    font-size: 16px;
+}
+
+.main .single{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main .single label{
+    font-size: 18px;
+}
+
+.main .double{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main .double label{
+    font-size: 18px;
+    text-align: left;
+}
+
+.main form div div select:hover{
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+
+/* .main form option:nth-child(1){
+    color: var(--primary-color);
+} */
+
+.main form input{
+    height: 40px;
+    width: 60%;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--secondary-color);
+    /* background-color: rgba(0, 174, 173, 0.5); */
+    /* box-shadow: 0px 0px 10px var(--secondary-color); */
+    border-radius: 10px;
+    padding: 10px;
+    color: var(--primary-color);
+}
+
+.main form .last{
+    margin: 20px auto;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 18px;
+}
+
+#existing_student_info form#fee_details div, #existing_student_info form#cc_form div{
+    margin: 50px 0px;
+    display: flex;
+    align-items: center;
+}
+
+#existing_student_info form div label{
+    width: 40%;
+    text-align: left;
+    font-size: 18px;
+}
+
+#existing_student_info form div input{
+    width: 60%;
+}
+
+#existing_student_info form div select{
+    height: 40px;
+    padding: 10px;
+    width: 60%;
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    color: var(--secondary-color);
+    font-size: 16px;
+}
+
+#existing_student_info form div select:hover{
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+
+.main form button{
+    display: block;
+    height: 50px;
+    font-size: 20px;
+    padding: 10px;
+    margin: 30px auto;
+    width: 150px;
+    cursor: pointer;
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    background-color: #fff;
+    color: var(--secondary-color);
+    font-weight: 400;
+    transition: 0.3s ease-in-out;
+    position: relative;
+    box-shadow: 6px 6px 1px -1px rgba(0, 0, 0, 0.15),
+                -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+}
+
+.main form button:hover{
+    color: #fff;
+    box-shadow: 6px 6px 1px -1px rgba(72,68,163,0.2),
+                -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
+    z-index: 2;
+}
+
+.main form button:hover::before{
+    content: '';
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    background-color: var(--secondary-color);
+    color: #fff;
+    animation: btn 0.3s linear forwards;
+    border-radius: 30px;
+    opacity: 1;
+    z-index: -2;
+}
+
+@keyframes btn{
+    0%{
+        width: 0%;
+    }
+    50%{
+        width: 50%;
+    }
+    100%{
+        width: 100%;
+    }
+}
+
+
+

@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "academics.css" %}">
+    <link rel="stylesheet" href="{% static "main.css" %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/0ceeca1f1f.js" crossorigin="anonymous"></script>
+    <title>Academics</title>
+</head>
+<body>
+    
+    <div class="navbar1">
+        <div class="hamburger1" id="menus"><i class="fa-solid fa-bars"></i></div>
+        <div class="school_title">
+            <a href="{% url "index" %}"><h3 style="font-size: 40px;">Champ School</h3></a>
+        </div>
+        <div>
+          <a href="{% url "login" %}" class="login">
+            <div class="Login">
+              <i class="fa-solid fa-user"></i>
+            </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="side-bar">
+        <div id="close"><i class="fa-solid fa-xmark"></i></div>
+        <ul>
+          <li><a href="{% url "index" %}">Home</a></li>
+          <li><a href="admission.html">Admission</a></li>
+          <li><a href="{% url "academics" %}">Academics</a></li>
+          <li><a href="{% url "life" %}">Student Life</a></li>
+          <li><a href="about.html">About Us</a></li>
+          {% if user.is_authenticated %}
+          <li><a href="{% url "logout" %}">Logout</a></li>
+          {% else %}
+          <li><a href="{% url "login" %}">Login</a></li>
+          {% endif %}
+        </ul>
+    </div>
+
+    <div class="nav1">
+      <div class="navigation">
+        <a href="index.html"><h5>Home</h5></a>
+        <h5> - Academics</h5>
+      </div>
+      <div class="rightnav">
+        <a href="#cbse"><h5>CBSE</h5></a>
+        <a href="#ci"><h5>CI</h5></a>
+        <a href="#pedagogy"><h5>Pedagogy</h5></a>
+        <a href="#placements"><h5>Placements</h5></a>
+      </div>
+    </div>
+
+    <div class="about">
+      <div id="cbse">
+        <h4>About <span>CBSE Program</span></h4>
+        <p>The CBSE Program offered by the School is monitored by the Central Board of Secondary Education and is offered from Class IV through Class XII. Initially, when a student enrolls into the School, they get to only choose the CBSE Curriculum, as it one of the most popular and widely accepted boards in the country. An individual may continue to study as a CBSE student until the end of their school tenure. However, they are offered a choice to shift to the CIE (Cambridge) Curriculum before the beginning of Class IX</p>
+        <p>The evaluations and assessment models are carefully crafted in accordance with latest CBSE Rules and Regulations and a close check on them is observed by the dedicated CBSE Teacher Coordinator.</p>
+        <p>The courseware of CBSE is meant to develop an analytical and reasoning-based thinking. As it is widely accepted across the country, it takes into account the diverse cultural backgrounds of the population of students. Therefore, it is a highly recommended program for an Ecolier, since the students at Ecole represent a variety of geographical and cultural diversity, coming from different backgrounds. This curriculum caters to every student and holds something different to offer to each individual. The material is comprehensive, easy to understand and grasp.</p>
+        <p>CBSE students also have an edge when it comes to writing national level entrance tests after Class XII, which are taken for the purpose of Undergrad admissions. The courseware studied over the years develops a sound base of knowledge, which students can directly apply at the time of such entrance exams.</p>
+        <p>The School provides highly skilled instructors, who have experience of numerous years in teaching the CBSE Curriculum. These teachers understand the ins and outs of CBSE learning methods, assessments, paper patterns and provide opportunities to students to do ample of practice for the same. Some of the teachers for the CBSE Curriculum have had past experience of teaching at some of the most respectable schools, for over 15 years and they continue to lend their expertise for the benefit of the students.</p>
+        <p>The Admission Counsellors can be contacted for more information about the CBSE Program offered by the School.</p>
+      </div>
+
+      <div id="ci">
+        <h4>About <span>CI (Cambridge Assessment International Education) Curriculum</span></h4>
+        <p>The Cambridge International curriculum sets a global standard for education, and is recognised by universities and employers worldwide. CI curriculum is flexible, challenging and inspiring, culturally sensitive yet international in approach. Cambridge students develop an informed curiosity and a lasting passion for learning. They also gain the essential skills they need for success at university and in their future careers. Over 10,000 schools in over 160 countries follow the Cambridge international curriculum.</p>
+        <p>Cambridge programmes combine an emphasis on mastering subjects in depth with the development skills for study and work in the future. It values deep subject knowledge as well as the conceptual understanding that helps students make links between different aspects of a subject. It also encourage students to develop higher order thinking skills – problem solving, critical thinking, independent research, collaboration and presenting arguments. These are transferable skills that will last a lifetime, preparing students for their future lives. It also make learning enjoyable and rewarding.</p>
+        <p>Cambridge qualifications are globally recognised, accepted by universities and employers at home and around the world. A Cambridge qualification comes with an impressive reputation, and will retain its value for a lifetime of education and employment. Over 1,400 universities worldwide recognise Cambridge qualifications. They are accepted by every UK university, by 600 universities in the US (including all the Ivy League universities) and in many other major student destinations, such as Canada, Australia, Singapore, South Africa, Germany and the Netherlands.</p>
+        <h5>Cambridge IGCSE (International General Certificate of Secondary Education)</h5>
+        <p>It’s the world’s most popular international qualification for 14 to 16 year olds. At Ecole the student can choose to decide between CBSE and CI curriculum in Grade 9. In the two-year IGCSE programme at Ecole, Classes IX and X students study a range of subjects that are exciting and challenging. Following subjects are offered at Ecole for its IGCSE Program</p>
+        <ul>
+          <li>Group 1: Languages- English(Compulsory), French/Spanish/Hindi</li>
+          <li>Group 2: Humanities- History, Geography, Economics</li>
+          <li>Group 3: Sciences- Physics, Chemistry, Biology, Environmental Management</li>
+          <li>Group 4: Mathematics</li>
+          <li>Group 5: Creative and Vocational – ICT, Art & Design, Business Studies, Accounts</li>
+        </ul>
+        <p>Cambridge IGCSE assessment takes place at the end of the course (every year during March) and can include written, oral, coursework and practical assessment. This broadens opportunities for students to demonstrate their learning, particularly when their first language is not English. Grades are benchmarked using eight internationally recognised grades. (A*, A, B, C, D, E, F and G).</p>
+        <h5>Cambridge AS and A Level</h5>
+        <p>This is a continuation of the IGCSE examination that the students take up in Grade 10. In India, it is equivalent to Grades 11 and 12. A Level stands for Advanced Level and AS Level stands for Advanced Subsidiary Level. An AS Level contains half the content of the corresponding A Level and is normally completed in one year. Learners take all the assessments for their full A Level at the end of the second year.</p>
+        <h5>The advantages of Cambridge A level are:</h5>
+        <ul>
+          <li>Levels – Comprehensive and immersive study of subjects.</li>
+          <li>Exposure to international policy making, thinking and problem solving.</li>
+          <li>Practical learning and knowledge application.</li>
+          <li>Logical and structured thinking models and rational discourses.</li>
+          <li>Internationally benchmarked grading system that encourages strengths and identifies.</li>
+          <li>weakness and provides guidelines for standards for achievement.</li>
+        </ul>
+        <p>At Ecole, students select 4-5 subjects for AS level and 3-4 subjects for A level.</p>
+        <p>The list of subjects are : English, Physics, Chemistry, Biology, Economics, Business, Accounts, History, Psychology, Information Technology, Mathematics</p>
+        <p>The Cambridge International A Level is reported on a grade scale from A* (highest) to E (minimum required performance). There is no A* grade for Cambridge International AS Levels, which run from grade A to E.</p>
+      </div>
+
+      <div id="pedagogy">
+        <h4><span>Pedagogy</span></h4>
+        <p>As an International School, Ecole Globale ensures that the boarding school experience remains stellar across its teaching methods. At Ecole, we believe at providing quality education to our girls and advocate planting challenges along the way of their growth, so that they can truly achieve comprehensive growth, not just inside the classroom, but also outside of it. The residential school experience teaches students various aspects of their life, such as self-management, time-management, organization, and balancing the academics, co- curriculars and extra-curriculars with ease.</p>
+        <p>All these methods to make students learn are well-complemented by the aids of technology, which help the teachers and students adapt to the latest methods of learning. The role of a teacher or instructor cannot be undermined in such a scenario, but these tools help the current generation learn in the way that they are most comfortable with – through technology. It may be noted that not all boarding schools provide the exquisite campus environment that Ecole Globale is humbled to provide to its girls.</p>
+        <p>In addition to what a child can learn within the campus, it is important for the girls to step out of the campus and experience life with fellow Ecoliers, while they are away from home. For an enriching experience of its own sorts, Ecole Globale is happy to organize field trips, educational trips or excursions and facilitate participation in external events like competitions with other international schools of repute in India.</p>
+        <p>To give students a flavor of how experts from different fields conduct their lives and accomplish milestones, Ecole Globale provides to its girls, the opportunity of interacting with experts through guest lectures that are conducted on campus. This is a unique chance since girls tend to find their role models through such interactions and learn from the experience of others.</p>
+        <p>In addition to the above, there are ample prospects through which the girls get truly international exposure, be it through excursions, tournaments or the participation of student fraternity from across the country, for national-level events.</p>
+      </div>
+
+      <div id="placements">
+        <h4><span>Placements</span></h4>
+        <p>Ecole Globale believes in all-round development and holistic education for its girls. We at Ecole have left no stone unturned when it comes to developing the academic and sporting potential, as well as the overall personality of the students. With thorough training, practice and guidance, the school prepares the girls for the future and fortified enough for their higher education.</p>
+        <p>Ecole Globale is proud of its alumni making their mark in several national and international universities and colleges of repute. We proudly call ourselves the Alma Mater to some of the sharpest minds studying at University of Delhi, National Institute of Fashion Technology (NIFT), Jawaharlal Nehru University, Bangalore University, DY Patil University, Institute of Business and Finance (ISBF) and National Rifle Association.</p>
+        <p>Our students have also continued to let the flag of Ecole flutter high at international institutes with a high stature of their own, such as London School of Economics and Political Science, University of London, Canadian Flight Institute and University of Nottingham to name a few. Many more students have also bagged scholarships in these universities, due to their academic excellence and overall performance.</p>
+        <p>Bagging a seat at such institutes is never easy without meticulous training and counselling for such a specialized purpose. Today, when the world is becoming highly competitive, we give our students an extra edge by providing them guidance by our in-house Career Counselling Experts, who make the necessary effort to give each student the necessary guidance for admission into universities of their choice.</p>
+        <p>All due documentation, exam preparation tips, profile-building guidance and assistance are sought by students before they apply to universities in their last year of schooling and the Career Counselling Cell is well-equipped to provide customised solutions to each such aspirant. The different career fairs and visits of campus ambassadors organized at Ecole Globale give a chance to students to interact with admission teams of their prospective universities on a personal level. General awareness about universities is also targeted to be improved through these career fairs, so that the girls can make informed decisions and accordingly prepare themselves for their next educational journey.</p>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer">
+        <div class="info">
+          <h3>International School</h3>
+          <ul>
+            <li><i class="fa-solid fa-house"></i><p>Village Horawalla, Near Sahaspur<br/>
+              Dehradun - 248197, Uttarakahnd, India</p></li>
+            <li><i class="fa-solid fa-envelope"></i><p>international@gmail.com</p></li>
+            <li><i class="fa-solid fa-phone"></i><p>+91 9876543210</p></li>
+          </ul>
+        </div>
+        <div class="social">
+          <ul>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+          </ul>
+        </div>
+        <div class="footerform">
+          <form>
+            <h4>Enquiry Form</h4>
+            <input type="text" placeholder="Name" id="contact-name" value="">
+            <input type="email" placeholder="Email" id="contact-email" value="">
+            <input type="text" placeholder="Phone" id="contact-phone" value="">
+            <button type="submit" id="contact-submit">Submit</button>
+          </form>
+        </div>
+      </div>
+      
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+        var side_bar = document.querySelector(".side-bar");
+        var ham = document.getElementById("menus");
+        var close = document.getElementById("close");
+
+        ham.addEventListener("click", ()=>{
+            side_bar.classList.toggle("show-side");
+        });
+
+        close.addEventListener("click", ()=>{
+        side_bar.classList.toggle("show-side");
+        });
+    </script>
+</body>
+</html>
