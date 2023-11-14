@@ -388,7 +388,7 @@
             </form>
             
             {% if fetch_details %}
-            <form action="/fee/" method="post" id='fetch_fill' id = "fee_entry_form" style="display:none;">
+            <form action="/fee/" method="post" id='fetch_fill' id = "fee_entry_form">
                 {% csrf_token %}
                 <input type='hidden' name='form_type' value='fill'> 
             <div class="double">
@@ -519,7 +519,7 @@
             </form>
 
           {% if details_for_cc %}
-            <form action="/cocurricular_performance/" method="post" style="display: none;">
+            <form action="/cocurricular_performance/" method="post">
                 <input type='hidden' name='form_type' value='fill'>
                 {% csrf_token %}
                 <label>Student: </label>{{details_for_cc.student_name}}<br></br>

@@ -716,6 +716,7 @@ def modify_work_details(request):
                 subject_id = employee.subject_id
                 subject= employee.subject
                 role = employee.role
+                
 
                 details = {
                     'first_name': first_name,

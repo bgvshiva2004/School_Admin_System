@@ -415,7 +415,7 @@
         </form>
         {% endif %}
 
-        <form action='/modify_salary_details/' method ='post' id='salary_details_form'>
+        <form action='/modify_salary_details/' method ='post' id='salary_details_form' style="display: none;">
             {% csrf_token %}
             <input type='hidden' name='form_type' value='fetch'>
             <h4>Search Employee</h4>
@@ -427,17 +427,17 @@
         </form>
 
         {% if salary_details %}
-        <form action='/modify_salary_details/' method ='post' style="display: none;">
+        <form action='/modify_salary_details/' method ='post' id='modify_salary_details_form'>
             {% csrf_token %}
             <input type='hidden' name='form_type' value='fill'>
             <label for="first_name">First Name</label>
-            <input type="text" name="first_name" placeholder={{salary_details.first_name }}>
+            <input type="text" name="first_name" placeholder={{salary_details.first_name}}>
             
             <label for="last_name">Last Name</label>
-            <input type="text" name="last_name" placeholder={{salary_details.last_name }}>
+            <input type="text" name="last_name" placeholder={{salary_details.last_name}}>
             
             <label for="account_no">Account Number</label>
-            <input type="text" name="account_no" placeholder={{ salary_details.account_no }}>
+            <input type="text" name="account_no" placeholder={{salary_details.account_no}}>
             
             <label for="bank">Bank</label>
             <input type="text" name="bank" placeholder={{ salary_details.bank }}>
