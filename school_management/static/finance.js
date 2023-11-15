@@ -5,20 +5,27 @@ const expenditure = document.getElementById('today_expenditure');
 const feeForm = document.getElementById('feeForm');
 const expenditureForm = document.getElementById('expenditureForm');
 
-todayFinance.addEventListener('click', () => {
-    feeForm.classList.add('hidden');
-    expenditureForm.classList.add('hidden');
-    list.classList.remove('hidden');
+function hideAllforms(){
+    list.style.display = 'none';
+    feeForm.style.display = 'none';
+    expenditureForm.style.display = 'none';
+}
+
+todayFinance.addEventListener('click',function(){
+    hideAllforms();
+    list.style.display = 'block';
 });
 
-feeCollection.addEventListener('click', () => {
-    feeForm.classList.remove('hidden');
-    expenditureForm.classList.add('hidden');
+feeCollection.addEventListener('click',function(){
+    hideAllforms();
+    list.style.display = 'block';
+    feeForm.style.display = 'block';
 });
 
-expenditure.addEventListener('click', () => {
-    feeForm.classList.add('hidden');
-    expenditureForm.classList.remove('hidden');
+expenditure.addEventListener('click',function(){
+    hideAllforms();
+    list.style.display = 'block';
+    expenditureForm.style.display = 'block';
 });
 
 document.addEventListener("DOMContentLoaded", function () {
