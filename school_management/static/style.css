@@ -28,7 +28,9 @@ body{
 .landing{
     transform: translateY(-80px);
     height: 100%;
-    background-color: rgb(228, 224, 224);
+    /* background-color: rgb(228, 224, 224); */
+    background: url(test.jpg);
+    background-size: cover;
     display: flex;
     align-items: center;
     justify-content: space-around;
