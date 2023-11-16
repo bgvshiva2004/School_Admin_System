@@ -51,13 +51,13 @@
         }
         #message-container {
             position: relative;
-            background: #f4f4f4;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 10px;
+            background: rgba(0,174,173,0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 50px auto;
             overflow: hidden;
-            width: 50%;
+            width: 30%;
+            box-shadow: 0px 0px 10px rgb(0,174,173);
         }
         
         #loading-bar {
@@ -66,7 +66,7 @@
             left: 100%;
             width: 100%;
             height: 3px; 
-            background: #0074d9; 
+            background: rgb(0,174,173); 
             z-index: 1;
             {% comment %} transition: left 5s ease-in; {% endcomment %}
         }
@@ -77,10 +77,11 @@
         
         .message {
             padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background: #fff;
+            border-radius: 10px;
+            background: rgba(0, 174, 173,0.6);
             margin-bottom: 10px;
+            box-shadow: 0px 0px 10px #fff;
+            color: #fff;
         }
         #revise_student_details_form{
             display:flex;
@@ -91,7 +92,7 @@
         .double{
             margin-bottom: 30px;
         }
-        #fee_entry_form{
+        #fee_entry_form, #if_cocurricular, .if_fee{
             display:flex;
             justify-content:center;
             align-items:center;
@@ -388,7 +389,7 @@
             </form>
             
             {% if fetch_details %}
-            <form action="/fee/" method="post" id='fetch_fill' id = "fee_entry_form">
+            <form action="/fee/" method="post" id='fetch_fill' id = "fee_entry_form" class="if_fee">
                 {% csrf_token %}
                 <input type='hidden' name='form_type' value='fill'> 
             <div class="double">
@@ -434,7 +435,7 @@
                 <input type="number" name="fee_paid">
             </div>
             </div>
-            <div class="single">
+            <div>
                 <label for="balance-fee" class="labels">Balance Fee</label>
                 <input type="number" name="balance_fee">
             </div>
@@ -519,16 +520,27 @@
             </form>
 
           {% if details_for_cc %}
-            <form action="/cocurricular_performance/" method="post">
+            <form action="/cocurricular_performance/" id="if_cocurricular" method="post">
                 <input type='hidden' name='form_type' value='fill'>
+                <h4>CocurricularPerformance</h4>
                 {% csrf_token %}
-                <label>Student: </label>{{details_for_cc.student_name}}<br></br>
-                <label>Class: </label>{{details_for_cc.student_class}}<br></br>
-                <label>Section: </label>{{details_for_cc.section}}<br></br>
-                <label>Activity-Id</label>
-                <input type='text' name='activity_id'><br></br>
-                <label>Performance Remark</label>
-                <input type='text' name='performance_remark'>
+                <div class="single">
+                    <label>Student: </label>{{details_for_cc.student_name}}
+                </div>
+                <div class="single">
+                    <label>Class: </label>{{details_for_cc.student_class}}
+                </div>
+                <div class="single">
+                    <label>Section: </label>{{details_for_cc.section}}
+                </div>
+                <div class="single">
+                    <label>Activity-Id</label>
+                    <input type='text' name='activity_id'>
+                </div>
+                <div class="single">
+                    <label>Performance Remark</label>
+                    <input type='text' name='performance_remark'>
+                </div>
                 <button type='submit'>Add</button>
             </form>
          {% endif %} 
