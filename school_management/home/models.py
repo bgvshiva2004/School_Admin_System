@@ -92,9 +92,9 @@ class FeeDetails(models.Model):
 
     def __str__(self):
         return self.adm_no
-
-class AcademicGrades(models.Model):
-    adm_no = models.OneToOneField('Student', on_delete=models.CASCADE, primary_key=True)
+    
+class StudentAcademicGrades(models.Model):
+    adm_no = models.ForeignKey('Student',on_delete=models.CASCADE,default='1234')
     academic_year = models.CharField(max_length=10, null=True,blank=True)
     student_name = models.CharField(max_length=100,null=True,blank=True)
     student_class = models.CharField(max_length=30,null=True,blank=True)
@@ -110,7 +110,6 @@ class AcademicGrades(models.Model):
 
     def __str__(self):
         return f"Academic Grades for Admission No. {self.adm_no}"
-    
 class Employee(models.Model):
     employee_id = models.CharField(max_length=10, primary_key=True)
     first_name = models.CharField(max_length=50)
@@ -142,7 +141,7 @@ class Employee(models.Model):
         return f"{self.first_name} {self.last_name} ({self.employee_id})"
     
 class FeeRecord(models.Model):
-    receipt_no = models.AutoField(primary_key=True)  # Auto-generated receipt number
+    receipt_no = models.AutoField(primary_key=True)
     date = models.DateField()
     adm_no = models.ForeignKey('FeeDetails', on_delete=models.CASCADE)
     student_name = models.CharField(max_length=100)

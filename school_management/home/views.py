@@ -1,5 +1,5 @@
 from django.shortcuts import render,HttpResponse,get_object_or_404
-from .models import Student,Employee,FeeDetails,Classwise_Fee,Transportation,FeeRecord,ExpenditureRecord,Cocurriculars,Cocurricular_performance,AcademicGrades
+from .models import Student,Employee,FeeDetails,Classwise_Fee,Transportation,FeeRecord,ExpenditureRecord,Cocurriculars,Cocurricular_performance,StudentAcademicGrades
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate,login as auth_login ,logout as auth_logout
 from django.contrib.auth.decorators import login_required
@@ -20,7 +20,7 @@ def login(request):
             auth_login(request,user)
             return render(request,'admin_interface.html')
         else:
-            return render(request,'login.html',{'message':'Invalid Credentials !!'})
+            messages.error(request,"Invalid Credentails !")
     return render(request,'login.html')
 
 # def admission(request):
@@ -144,7 +144,7 @@ def academic_grades(request):
         try:
             student = Student.objects.get(adm_no=adm_no)
 
-            data = AcademicGrades.objects.create(
+            data = StudentAcademicGrades.objects.create(
                 adm_no = student,
                 student_name = f"{student.first_name} {student.last_name}",
                 student_class = student.student_class,
@@ -428,11 +428,12 @@ def today_fee_record(request):
                 student = FeeDetails.objects.get(adm_no=adm_no)
 
             except Exception as e:
-                messages.error(request,'Invalid Admission Np. !')
+                messages.error(request,'Invalid Admission No. !')
                 return render(request,'finance.html')
             
             try:
                 student_name = student.student_name
+                # student_class = student.student_class
                 total_fee = student.total_fee
                 balance_fee = student.balance_fee
 
@@ -440,6 +441,9 @@ def today_fee_record(request):
                 request.session['student_name'] = student_name
                 request.session['total_fee'] = str(total_fee)
                 request.session['balance_fee'] = str(balance_fee)
+                request.session['adm_no']=adm_no
+                request.session['student_class']= student_class
+                request.session['section']=section
 
                 fetch_details = {
                     'student_name': student_name,
@@ -468,10 +472,11 @@ def today_fee_record(request):
 
             
             try:
-                fee_details = FeeDetails.objects.get(adm_no=adm_no)
+                admission_no = FeeDetails.objects.get(adm_no=adm_no)
+
                 data = FeeRecord.objects.create(
                     date=date,
-                    adm_no=fee_details,
+                    adm_no=admission_no,
                     receipt_no=receipt_no,
                     section=section,
                     student_class=student_class,
@@ -480,8 +485,9 @@ def today_fee_record(request):
                     total_fee=total_fee,
                     balance_fee=balance_fee
                 )
+
                 data.save()
-                messages.success(request, "Done!")
+                messages.success(request, "Succesfull !")
             except FeeDetails.DoesNotExist:
                 messages.error(request, "Invalid Details !!")
             
@@ -512,12 +518,11 @@ def past_fee_records(request):
     if request.method == "POST":
         date = request.POST.get('date')
 
-
         fee_record = FeeRecord.objects.filter(date=date)
         if fee_record:
             return render(request, 'view.html', {'fee_record': fee_record})
         else:
-            messages.error("No Record found!")
+            messages.error(request,"No Record found!")
     return render(request,'view.html')
 
 @login_required
@@ -538,11 +543,15 @@ def activities(request):
     if request.method == "POST":
         activity_id = request.POST.get('activity_id')
         activity_name = request.POST.get('activity_name')
+        trainer = request.POST.get('trainer')
+        description = request.POST.get('description')
 
         try:
             entry = Cocurriculars.objects.create(
                 activity_id = activity_id,
-                activity_name =activity_name
+                activity_name =activity_name,
+                trainer = trainer,
+                description = description
             )
             entry.save()
             messages.success(request,"Action Succesfull !")

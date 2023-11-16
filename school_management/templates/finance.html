@@ -167,7 +167,6 @@
             {% csrf_token %}
             <input type='hidden' name='form_type' value='fetch'>
             <h4>Fee Form</h4>
-            {% comment %} <label>Receipt No.</label> {% endcomment %}
             <div class="single">
                 <label>Date</label>
                 <input type='date' name='date'>
@@ -235,7 +234,7 @@
             </div>
             <div class="single">
                 <label>Purpose</label>
-                <input type='text' placeholder='Specify the Purpose of Expenditure' name='purpose'>
+                <input type='text' placeholder='Purpose' name='purpose'>
             </div>
             <div class="single">
                 <label>Amount</label>

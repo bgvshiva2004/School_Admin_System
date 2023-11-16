@@ -25,7 +25,40 @@
         }
         body{
             background-color: rgba(0, 174, 173, 0.15);
-        }   
+        }  
+        #message-container {
+            position: relative;
+            background: rgba(0,174,173,0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 50px auto;
+            overflow: hidden;
+            width: 30%;
+            box-shadow: 0px 0px 10px rgb(0,174,173);
+          }
+        
+          #loading-bar {
+            position: absolute;
+            bottom: 0;
+            left: 100%;
+            width: 100%;
+            height: 3px; 
+            background: rgb(0,174,173); 
+            z-index: 1;
+        }
+        
+        #message-content {
+            z-index: 2;
+        }
+        
+        .message {
+          padding: 10px;
+          border-radius: 10px;
+          background: rgba(0, 174, 173,0.6);
+          margin-bottom: 10px;
+          box-shadow: 0px 0px 10px #fff;
+          color: #fff;
+        } 
     </style>
 </head>
 <body>
@@ -65,7 +98,17 @@
             <h5> - Login</h5>
         </div>
 
-        {{message}}
+        {% for msg in messages %}
+        <div id="message-container">
+            <div id="loading-bar"></div>
+            <div id="message-content">
+                
+                    <div class="message">{{ msg }}</div>
+                
+            </div>
+        </div>
+        {% endfor %}
+
         {% if user.is_authenticated %}
         <div id="logout">
             <a href="{% url "logout" %}" style="color:black;" class="logout">Logout</a>
@@ -126,5 +169,24 @@
     
     <script src="{% static "login.js" %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var loadingBar = document.getElementById("loading-bar");
+            var messageContainer = document.getElementById("message-container");
+        
+            // Animate the loading bar
+            var width = 100;
+            var interval = setInterval(function () {
+                if (width <= 0) {
+                    clearInterval(interval);
+                    // Hide the message container
+                    messageContainer.style.display = "none";
+                } else {
+                    width -= 1;
+                    loadingBar.style.left = width + "%";
+                }
+            }, 25); // Adjust the speed of the loading bar animation by changing the interval duration
+        });
+      </script>
 </body>
 </html>

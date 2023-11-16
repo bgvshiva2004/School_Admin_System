@@ -57,6 +57,9 @@ const expenditure_date = document.getElementById('expenditure_date');
 
 const classwise_table = document.getElementById('classwise_table');
 const student_bio = document.getElementById('student_bio');
+const employee_bio = document.getElementById('employee_bio');
+const fee_record_table = document.getElementById('fee_record_table');
+const exp_record_table= document.getElementById('exp_record_table');
 
 function hideAll(){
   finance_list.style.display = 'none';
@@ -67,43 +70,51 @@ function hideAll(){
   expenditure_date.style.display = 'none';
 }
 
-
-
-classwise_student_list.addEventListener('click',function(e){
-  hideAll();
-  console.log(window.location.href)
-  classwise_list.style.display = 'block';
-  
+function hidetables(){
   if(window.location.href === "http://127.0.0.1:8000/classwise_students/"){
     classwise_table.style.display = 'none';
   }else if(window.location.href === "http://127.0.0.1:8000/get_student_details/"){
     student_bio.style.display = 'none';
+  }else if(window.location.href === "http://127.0.0.1:8000/get_employee_details/"){
+    employee_bio.style.display = 'none';
+  }else if(window.location.href === 'http://127.0.0.1:8000/past_fee_records/'){
+    fee_record_table.style.display = 'none';
+  }else if(window.location.href === 'http://127.0.0.1:8000/past_expenditure_records/'){
+    exp_record_table.style.display = 'none';
   }
+}
+
+classwise_student_list.addEventListener('click',function(){
+  hideAll();
+  classwise_list.style.display = 'block';
   
-  
+  hidetables();
 });
 
 student_complete_details.addEventListener('click',function(){
   hideAll();
   student_details_form.style.display = 'block';
+  hidetables();
 });
 
 employee_details.addEventListener('click',function(){
   hideAll();
   employee_details_form.style.display = 'block';
+  hidetables();
 });
 
 fee.addEventListener('click',function(){
   hideAll();
   fee_date.style.display = 'block';
+  hidetables();
 });
 
 expenditure.addEventListener('click',function(){
   hideAll();
   expenditure_date.style.display = 'block'; 
+  hidetables();
 });
 
 past_finance.addEventListener('click',function(){
-  // hideAll();
   finance_list.style.display = 'block';
 });

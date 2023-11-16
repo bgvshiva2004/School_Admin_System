@@ -46,3 +46,4 @@ var side_bar = document.querySelector(".side-bar");
                 nav1.classList.remove("sticky");
             }
         }
+
