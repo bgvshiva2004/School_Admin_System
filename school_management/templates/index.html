@@ -195,7 +195,7 @@
       <div id="close"><i class="fa-solid fa-xmark"></i></div>
       <ul>
         <li><a href="{% url "index" %}">Home</a></li>
-        <li><a href="admission.html">Admission</a></li>
+        <li><a href="{% url "student_management" %}">Admission</a></li>
         <li><a href="{% url "academics" %}">Academics</a></li>
         <li><a href="{% url "life" %}">Student Life</a></li>
         {% if user.is_authenticated %}
@@ -297,7 +297,7 @@
                         <img src="{% static 'person2.jpg' %}" alt="">
                         <h3 class="staff-name">BGV Shiva</h3>
                         <p class="staff-role">Teacher</p>
-                        <p class="staff-review">Champ School provides an excellent international education that combines the IB programme with the school's values</p>
+                        <p class="staff-review">Champ School provides an excellent quality international education that combines the IB programme with the school's values</p>
                         <div class="stars">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -310,7 +310,7 @@
 
                 <div class="slider swiper-slide">
                     <div class="staffs-box">
-                        <img src="{% static 'person3.jpg' %}" alt="">
+                        <img src="{% static 'person3_1.jpg' %}" alt="">
                         <h3 class="staff-name">K Niketh Reddy</h3>
                         <p class="staff-role">Student</p>
                         <p class="staff-review">The teachers are friendly, helpful, and knowledgeable. They encourage us to think critically, creatively, and independently.</p>
