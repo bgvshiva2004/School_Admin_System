@@ -25,10 +25,12 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-right: 30px;
+            font-size: 20px;
           }
         
           table, th, td {
-            border: 1px solid #aaa;
+            border: 1px solid rgb(0, 174, 173);
           }
         
           th, td {
@@ -37,15 +39,20 @@
           }
         
           th {
-            background-color: #f2f2f2;
+            background-color: rgba(0, 174, 173, 0.6);
+            color: #fff;
+            border: 1px solid #fff;
           }
         
           tr:nth-child(even) {
-            background-color: #f2f2f2;
+            {% comment %} background-color: rgba(0, 174, 173,0.3); {% endcomment %}
+            background-color:#fff;
+            color: rgb(0,174, 173);
           }
         
           tr:nth-child(odd) {
             background-color: #fff;
+            color: rgb(0, 174,173);
           }
           #finance_list{
             display:none;
@@ -126,6 +133,10 @@
             background-color: var(--secondary-color);
             color: #fff;
         }
+
+        #student_bio, #employee_bio{
+          width: 60%;
+        }
         
     </style>
 </head>
@@ -133,7 +144,7 @@
   <div class="navbar1">
     <div class="hamburger1" id="menus"><i class="fa-solid fa-bars"></i></div>
     <div class="school_title">
-        <a href="{% url "index" %}"><h3 style="font-size: 40px;">Champ School</h3></a>
+        <a href="{% url "index" %}"><h3 style="font-size: 32px;">CHAMP INTERNATIONAL SCHOOL</h3></a>
     </div>
     <div>
       <a href="{% url "login" %}" class="login">
@@ -151,7 +162,6 @@
       <li><a href="admission.html">Admission</a></li>
       <li><a href="{% url "academics" %}">Academics</a></li>
       <li><a href="{% url "life" %}">Student Life</a></li>
-      <li><a href="about.html">About Us</a></li>
       {% if user.is_authenticated %}
         <li><a href="{% url "admin_interface" %}">Admin Operations</a></li>
         <li><a href="{% url "logout" %}">Logout</a></li>
@@ -359,67 +369,67 @@
   {% if employee %}
         <table id="employee_bio">
             <tr>
-                <td>Employee ID</td>
+                <th>Employee ID</th>
                 <td>{{ employee.employee_id }}</td>
             </tr>
             <tr>
-                <td>First Name</td>
+                <th>First Name</th>
                 <td>{{ employee.first_name }}</td>
             </tr>
             <tr>
-                <td>Last Name</td>
+                <th>Last Name</th>
                 <td>{{ employee.last_name }}</td>
             </tr>
             <tr>
-                <td>Qualification</td>
+                <th>Qualification</th>
                 <td>{{ employee.qualification }}</td>
             </tr>
             <tr>
-                <td>Experience</td>
+                <th>Experience</th>
                 <td>{{ employee.experience }}</td>
             </tr>
             <tr>
-                <td>Email</td>
+                <th>Email</th>
                 <td>{{ employee.email }}</td>
             </tr>
             <tr>
-                <td>Contact</td>
+                <th>Contact</th>
                 <td>{{ employee.contact }}</td>
             </tr>
             <tr>
-                <td>Work Type</td>
+                <th>Work Type</th>
                 <td>{{ employee.work_type }}</td>
             </tr>
             <tr>
-                <td>Working Hours</td>
+                <th>Working Hours</th>
                 <td>{{ employee.working_hours }}</td>
             </tr>
             <tr>
-                <td>Subject ID</td>
+                <th>Subject ID</th>
                 <td>{{ employee.subject_id }}</td>
             </tr>
             <tr>
-                <td>Subject</td>
+                <th>Subject</th>
                 <td>{{ employee.subject }}</td>
             </tr>
             <tr>
-                <td>Role</td>
+                <th>Role</th>
                 <td>{{ employee.role }}</td>
             </tr>
             <tr>
-                <td>Account No</td>
+                <th>Account No</th>
                 <td>{{ employee.account_no }}</td>
             </tr>
             <tr>
-                <td>Bank</td>
+                <th>Bank</th>
                 <td>{{ employee.bank }}</td>
             </tr>
             <tr>
-                <td>IFSC Code</td>
+                <th>IFSC Code</th>
                 <td>{{ employee.ifsc_code }}</td>
             </tr>
             <tr>
-                <td>Salary</td>
+                <th>Salary</th>
                 <td>{{ employee.salary }}</td>
             </tr>
         </table>
@@ -481,7 +491,7 @@
   <footer>
     <div class="footer">
       <div class="info">
-        <h4>Champ School</h4>
+        <h4>Champ International School</h4>
       </div>
       <div class="social">
         <ul>

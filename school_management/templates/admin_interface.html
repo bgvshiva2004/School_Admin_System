@@ -89,7 +89,7 @@
     <div class="navbar1">
         <div class="hamburger1" id="menus"><i class="fa-solid fa-bars"></i></div>
         <div class="school_title">
-            <a href="{% url "index" %}"><h3 style="font-size: 40px;">Champ School</h3></a>
+            <a href="{% url "index" %}"><h3 style="font-size: 32px;">CHAMP INTERNATIONAL SCHOOL</h3></a>
         </div>
         <div>
           <a href="{% url "login" %}" class="login">
@@ -107,7 +107,6 @@
           <li><a href="admission.html">Admission</a></li>
           <li><a href="{% url "academics" %}">Academics</a></li>
           <li><a href="{% url "life" %}">Student Life</a></li>
-          <li><a href="about.html">About Us</a></li>
           {% if user.is_authenticated %}
         <li><a href="{% url "admin_interface" %}">Admin Operations</a></li>
         <li><a href="{% url "logout" %}">Logout</a></li>
@@ -158,7 +157,7 @@
     <footer>
         <div class="footer">
         <div class="info">
-            <h4>Champ School</h4>
+            <h4>Champ International School</h4>
         </div>
         <div class="social">
             <ul>
