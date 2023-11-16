@@ -8,12 +8,169 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static "style.css" %}">
     <link rel="stylesheet" href="{% static "main.css" %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" /><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/0ceeca1f1f.js" crossorigin="anonymous"></script>
     <title>Home</title>
     <style>
       .side-bar{
         z-index: 2;
+      }
+      .homeboy img{
+        animation: img 1s linear forwards;
+      }
+      @keyframes img{
+        0%{
+          transform: translateY(100%);
+          opacity: 0;
+        }
+        50%{
+          transform: translateY(50%);
+          opacity: 0.5;
+        }
+        100%{
+          transform: translateY(0%);
+          opacity: 1;
+        }
+      }
+      .maincontent h4{
+        animation: h4 0.5s linear forwards;
+      }
+      @keyframes h4{
+        0%{
+          transform: translateY(100px);
+          opacity: 0;
+        }
+        50%{
+          transform: translateY(50px);
+          opacity: 0.5;
+        }
+        100%{
+          transform: translateY(0px);
+          opacity: 1;
+        }
+      }
+
+      .maincontent h3{
+        animation: h3 1s linear forwards;
+      }
+      @keyframes h3{
+        0%{
+          transform: translateY(100px);
+          opacity: 0;
+        }
+        50%{
+          transform: translateY(100px);
+          opacity: 0;
+        }
+        100%{
+          transform: translateY(0px);
+          opacity: 1;
+        }
+      }
+
+      .maincontent p{
+        animation: p 1.5s linear forwards;
+      }
+      @keyframes p{
+        0%{
+          transform: translateY(100px);
+          opacity: 0;
+        }
+        50%{
+          transform: translateY(100px);
+          opacity: 0;
+        }
+        75%{
+          transform: translateY(100px);
+          opacity: 0;
+        }
+        100%{
+          transform: translateY(0px);
+          opacity: 1;
+        }
+      }
+      .maincontent a{
+        animation: a 2s linear forwards;
+      }
+      @keyframes a{
+        0%{
+          transform: translateY(100px);
+          opacity: 0;
+        }
+        50%{
+          transform: translateY(100px);
+          opacity: 0;
+        }
+        75%{
+          transform: translateY(100px);
+          opacity: 0;
+        }
+        100%{
+          transform: translateY(0px);
+          opacity: 1;
+        }
+      }
+
+      /* Staffs Section */
+      #staffs-container{
+          min-height : 100vh;
+          background-color: rgba(0, 174, 173, 0.15);
+          padding-bottom: 100px;
+      }
+      .staffs-main{
+          width : 80%;
+          margin : 0 auto;
+          padding : 5% 0 0 0;
+          text-align : center;
+      }
+      .staffs-subtitle{
+          font-size : 1.5rem;
+          font-family: "Ubuntu", cursive;
+          color : rgb(24, 188, 156);
+      }
+      .staffs-title{
+          font-weight : 500;
+          font-size : 2.5rem;
+      }
+      .swiper-container{
+          width : 90%;
+          margin : auto;
+          margin-top : 50px;
+          overflow : hidden;
+          padding : 10px;
+          cursor : grab;
+      }
+      .staffs-wrapper{
+          display : flex;
+          align-items : center;
+      }
+      .staffs-box{
+          background-color: #fff;
+          padding : 20px;
+          margin : auto;
+          border-radius : 10px;
+      }
+      .staffs-box img{
+          height : 125px;
+          width : 125px;
+          border-radius: 50%;
+      }
+      .staff-name{
+          color : rgb(24, 188, 156);
+      }
+      .staff-role{
+          color : #0A0A0A;
+          padding-bottom: 10px;
+          border-bottom : 2px solid rgb(24, 188, 156);
+      }
+      .staff-review{
+          color : #444;
+          margin-top : 10px;
+          text-align: left;
+      }
+      .stars{
+          margin-top : 10px;
+          color : rgb(24, 188, 156);
       }
     </style>
 </head>
@@ -38,7 +195,7 @@
       <div id="close"><i class="fa-solid fa-xmark"></i></div>
       <ul>
         <li><a href="{% url "index" %}">Home</a></li>
-        <li><a href="{% url "student_management" %}">Admission</a></li>
+        <li><a href="admission.html">Admission</a></li>
         <li><a href="{% url "academics" %}">Academics</a></li>
         <li><a href="{% url "life" %}">Student Life</a></li>
         {% if user.is_authenticated %}
@@ -52,7 +209,7 @@
 
   <div class="landing">
     <div class="maincontent">
-      <h4>Welcome to Champ International School!</h4>
+      <h4>Welcome to Champ School!</h4>
       <h3 style="text-shadow: 0px 0px 4px rgb(24, 188, 156)">Bring Great Life To Your Children.</h3>
       <p>Amazing Environment To Learn!</p>
       <a href="#about"><button>Learn More</button></a>
@@ -68,8 +225,8 @@
           <div class="hover">
             <span>
               <div class="active" id="ovebtn">Overview</div>
-              <div id="teambtn">Our Team</div>
-              <div id="resbtn">Results</div>
+              <!-- <div id="teambtn">Our Team</div>
+              <div id="resbtn">Results</div> -->
               <div id="aboutbtn">About</div>
             </span>
             <div id="overview">
@@ -79,12 +236,12 @@
               <p>Ecole Globale International Girls' School is furnished with all the latest technologies and amenities. We strive to improve women's representation and mold young girls into strong ladies with excellent leadership qualities. The girls here are prepared to master the art of professionalism and to host a cool house party. We believe in the amalgamation of distinct cultures and backgrounds.</p>
               <p>With girls from all over the country, we have made a diverse atmosphere where students are a part of the mature, smart, and intelligent community of women. The profoundly experienced faculty are the masters of their respective subjects and are always keen to provide knowledge (apart from educational lessons). They dedicatedly assist the girls in becoming ready to lead a victorious life in their preferred career areas and shine in their personal lives.</p>
             </div>
-            <div id="OurTeam">
+            <!-- <div id="OurTeam">
 
-            </div>
-            <div id="Results">
+            </div> -->
+            <!-- <div id="Results">
 
-            </div>
+            </div> -->
             <div id="AboutSchool">
               <p>In this Blooming era of education, schools try their best to provide holistic development to the students. Apart from delivering rudimentary knowledge, there is a lot of effort to establish students' careers by preparing them to be the leaders of tomorrow.</p>
               <p>Ecole Globale International Girls' School is one of the premier Institutes for girls. Girls residential schools in Dehradun often take the onus of providing the best accommodation to students. Ecole Globale deserves accolades for the kind of security, medical facilities, hospitality, and education it provides to the girls.The sheer dedication with which teachers deliver their work is truly commendable. The alumni who prove to be overachievers have all good things to say about this school.</p>
@@ -93,17 +250,115 @@
             </div>
           </div>
     </div>
+  </div>
 
-    <div class="parents">
-        <h2>WHAT PARENTS SAY</h2>
-        <p class="abs">Our satisfied parents what says about us..</p>
-        <div class="parent">
-          <!-- Parent -->
-          <img src="{% static "anonymous.jpg" %}" class="anonymous">
-          <h4>Apurv Neema</h4>
-          <p>“Indore International School is a wonderful school nurturing a child and focusing not only on academic and extra-curricular activities but also on ethical values, social well behaviour, physical and intellectual development. ”</p>
+  <div id="staffs-container">
+    <div class="staffs-main">
+        <h3 class="staffs-subtitle">-Reviews-</h3>
+        <h1 class="staffs-title">A Big Thanks To Our Community!</h1>
+        <!-- Swiper 2 -->
+        <div class="swiper-container staffs-slider">
+            <div class="swiper-wrapper staffs-wrapper">
+
+                <div class="slider swiper-slide">
+                    <div class="staffs-box">
+                        <img src="{% static 'person5.png' %}" alt="">
+                        <h3 class="staff-name">Elsa</h3>
+                        <p class="staff-role">Founder</p>
+                        <p class="staff-review">I am proud of our students, teachers, and staff who work together to create a diverse, inclusive, and innovative learning community.</p>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slider swiper-slide staff-slider">
+                    <div class="staffs-box">
+                        <img src="{% static 'person1.jpg' %}" alt="">
+                        <h3 class="staff-name">Madan P</h3>
+                        <p class="staff-role">Alumni</p>
+                        <p class="staff-review">The school offers a high-quality education that combines the innovation of the IB programme with the ethos of the school.</p>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slider swiper-slide">
+                    <div class="staffs-box">
+                        <img src="{% static 'person2.jpg' %}" alt="">
+                        <h3 class="staff-name">BGV Shiva</h3>
+                        <p class="staff-role">Teacher</p>
+                        <p class="staff-review">Champ School provides an excellent international education that combines the IB programme with the school's values</p>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slider swiper-slide">
+                    <div class="staffs-box">
+                        <img src="{% static 'person3.jpg' %}" alt="">
+                        <h3 class="staff-name">K Niketh Reddy</h3>
+                        <p class="staff-role">Student</p>
+                        <p class="staff-review">The teachers are friendly, helpful, and knowledgeable. They encourage us to think critically, creatively, and independently.</p>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slider swiper-slide">
+                    <div class="staffs-box">
+                        <img src="{% static 'person4.jpg' %}" alt="">
+                        <h3 class="staff-name">K Tejaswini</h3>
+                        <p class="staff-role">Alumni</p>
+                        <p class="staff-review">I am proud to be a Champ and I highly recommend this school to anyone who wants to achieve their full potential.</p>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slider swiper-slide">
+                    <div class="staffs-box">
+                        <img src="{% static 'person6.jpg' %}" alt="">
+                        <h3 class="staff-name">Rolex</h3>
+                        <p class="staff-role">Student</p>
+                        <p class="staff-review">The teachers, facilities, and activities are amazing and help me grow as a learner and a global citizen.</p>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
+    </div> 
   </div>
 
     <footer>
@@ -138,7 +393,106 @@
       
     </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-  <script src="{% static "script.js" %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <!-- <script src="{% static "script.js" %}"></script> -->
+  <script>
+    var swiper2 = new Swiper(".staffs-slider", {
+    spaceBetween : 20,
+    loop : true,
+    calculateHeight : true,
+    autoplay : {
+        delay : 2500,
+        disableOnInteraction : false,
+    },
+    breakpoints: {
+        640: {
+            slidesPerView: 1,
+        },
+        800: {
+            slidesPerView : 2,
+        },
+        1200: {
+            slidesPerView : 3,
+        }
+      }
+    })  
+
+    var overview = document.getElementById("overview");
+      // var OurTeam = document.getElementById('OurTeam');
+      // var Results = document.getElementById('Results');
+      var AboutSchool = document.getElementById('AboutSchool');
+      var ovebtn = document.getElementById('ovebtn');
+      // var teambtn = document.getElementById('teambtn');
+      // var resbtn = document.getElementById('resbtn');
+      var aboutbtn = document.getElementById('aboutbtn');
+
+      ovebtn.addEventListener("click", function(){
+        overview.style.display = 'block';
+        // OurTeam.style.display = 'none';
+        // Results.style.display = 'none';
+        AboutSchool.style.display = 'none';
+        ovebtn.classList.add("active");
+        // teambtn.classList.remove("active");
+        // resbtn.classList.remove("active");
+        aboutbtn.classList.remove("active");
+      });
+
+      // teambtn.addEventListener("click", function(){
+      //   overview.style.display = 'none';
+      //   OurTeam.style.display = 'block';
+      //   Results.style.display = 'none';
+      //   AboutSchool.style.display = 'none';
+      //   ovebtn.classList.remove("active");
+      //   teambtn.classList.add("active");
+      //   resbtn.classList.remove("active");
+      //   aboutbtn.classList.remove("active");
+      // });
+
+      // resbtn.addEventListener("click", function(){
+      //   overview.style.display = 'none';
+      //   OurTeam.style.display = 'none';
+      //   Results.style.display = 'block';
+      //   AboutSchool.style.display = 'none';
+      //   ovebtn.classList.remove("active");
+      //   teambtn.classList.remove("active");
+      //   resbtn.classList.add("active");
+      //   aboutbtn.classList.remove("active");
+      // });
+
+      aboutbtn.addEventListener("click", function(){
+        overview.style.display = 'none';
+        // OurTeam.style.display = 'none';
+        // Results.style.display = 'none';
+        AboutSchool.style.display = 'block';
+        ovebtn.classList.remove("active");
+        // teambtn.classList.remove("active");
+        // resbtn.classList.remove("active");
+        aboutbtn.classList.add("active");
+      });
+
+        var side_bar = document.querySelector(".side-bar");
+        var ham = document.getElementById("menus");
+        var close = document.getElementById("close");
+
+        ham.addEventListener("click", ()=>{
+            side_bar.classList.toggle("show-side");
+        });
+
+        close.addEventListener("click", ()=>{
+          side_bar.classList.toggle("show-side");
+        });
+
+        var nav1 = document.querySelector(".navbar1");
+        var val;
+        window.onscroll = function(){
+            if(document.documentElement.scrollTop > 20){
+                nav1.classList.add("sticky");
+            }
+            else{
+                nav1.classList.remove("sticky");
+            }
+        }
+  </script>
 </body>
-</html>
+</html
