@@ -6,12 +6,12 @@
 
 div h4{
     font-size: 30px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     font-weight: 700;
 }
 
 h4 span{
-    color: orange;
+    color: rgb(0, 174, 173);
     font-weight: 700;
 }
 
@@ -22,3 +22,27 @@ h4 span{
 div h5{
     font-weight: 600;
 }
+
+.about div ul li{
+    font-size: 17px;
+    list-style-type: square;
+    margin-bottom: 10px;
+}
+
+body{
+    background-color: rgba(0, 174, 173, 0.15);
+  }
+
+  .rightnav a h5{
+    font-weight: 400;
+    font-size: 18px;
+  }
+
+  .nav1 a h5{
+    font-size: 18px;
+  }
+  
+  .nav1 h5{
+    font-weight: 500;
+    font-size: 18px;
+  }

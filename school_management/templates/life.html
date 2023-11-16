@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static "main.css" %}">
+    <link rel="stylesheet" href="{% static "style.css" %}">
+    <link rel="stylesheet" href="{% static "academics.css" %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/0ceeca1f1f.js" crossorigin="anonymous"></script>
     <title>Student Life</title>
@@ -48,10 +50,30 @@
         <h5> - Student Life</h5>
       </div>
       <div class="rightnav">
-        <a href="#cbse"><h5>CBSE</h5></a>
-        <a href="#ci"><h5>CI</h5></a>
-        <a href="#pedagogy"><h5>Pedagogy</h5></a>
-        <a href="#placements"><h5>Placements</h5></a>
+        <a href="#life"><h5>Life</h5></a>
+        <a href="#exchange"><h5>Exchange Programme</h5></a>
+      </div>
+    </div>
+
+    <div class="about">
+      <div id="life">
+        <h4>About <span>Student Life</span></h4>
+        <ul>
+          <li>A typical day in the life of an Ecolier starts early with the Morning PT, so that students can start their day afresh and with a clear mind and ample physical energy.</li>
+          <li>To support the students round the clock, in their physical well-being, the School Infirmary conducts periodic dental, skin and hygiene checks.</li>
+          <li>The different dimensions of academics are taught during academic time, and students get some rest-time afterward to refresh themselves.</li>
+          <li>The messing facilities are one of the best among the top boarding schools and international schools across India, where the meals are well-planned to suit the bodily and cognitive needs of the children. The meals provided throughout the day have always been highly appreciated by the faculty and students.</li>
+          <li>In addition to this, the home-work hour is specially organized in the academic block in the evenings, to clarify queries that the students may have. The faculty ensures that they can make the most of this time by giving personal attention to each child.</li>  
+        </ul>
+      </div>
+        
+      <div id="exchange">
+        <h4>Exchage <span>Programme</span></h4>
+        <ul>
+          <li>In the pursuit of helping our students develop into global citizens, one primary program we conduct regularly is the student exchange. The Ecole Globale is an active part of the Round Square International Service (RSIS) which includes students from some of the world’s most prestigious and renowned institutes.</li>
+          <li>Through this program, not only are our students often sent abroad to participate but also sometimes our students play host to many students who visit from different countries. The foreign students who visit our premise for a brief period not only expand their horizons but also give our girls the opportunity to experience a new culture, respect their traditions and most of all just have a deeper understanding of the problems in the world.</li>
+          <li>There is no lesson taught in the classroom that can replace the experience of an exchange program. The depth of understanding and also appreciation of the diversity in cultures is unparalleled.</li>
+        </ul>
       </div>
     </div>
 
@@ -100,6 +122,17 @@
         close.addEventListener("click", ()=>{
         side_bar.classList.toggle("show-side");
         });
+
+        var nav1 = document.querySelector(".navbar1");
+        var val;
+        window.onscroll = function(){
+            if(document.documentElement.scrollTop > 20){
+                nav1.classList.add("sticky");
+            }
+            else{
+                nav1.classList.remove("sticky");
+            }
+        }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>

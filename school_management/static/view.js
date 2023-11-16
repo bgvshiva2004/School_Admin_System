@@ -18,73 +18,6 @@ window.onscroll = function(){
     }
 }
 
-
-const classwise_student_list = document.getElementById('classwise_student_list');
-        const classwise_list= document.getElementById('classwise_list');
-        const past_finance = document.getElementById('past_finance');
-        const finance_list = document.getElementById('finance_list');
-        const fee = document.getElementById('fee');
-        const fee_date = document.getElementById('fee_date');
-        const expenditure = document.getElementById('expenditure');
-        const expenditure_date = document.getElementById('expenditure_date');
-
-
-        const student_complete_details=document.getElementById('student_complete_details');
-        const student_details_form = document.getElementById('student_details_form');
-
-        const employee_details =document.getElementById('employee_details');
-        const employee_details_form=document.getElementById('employee_details_form');
-
-        classwise_student_list.addEventListener('click',function(){
-          fee_date.style.display = 'none';
-          expenditure_date.style.display = 'none';
-            student_details_form.style.display = 'none';
-            employee_details_form.style.display = 'none';
-            finance_list.style.display = 'none';
-            classwise_list.style.display = 'block';
-        });
-
-        student_complete_details.addEventListener('click',function(){
-          fee_date.style.display = 'none';
-          expenditure_date.style.display = 'none';
-            classwise_list.style.display = 'none';
-            employee_details_form.style.display = 'none';
-            finance_list.style.display = 'none';
-            student_details_form.style.display = 'block';
-        });
-
-        employee_details.addEventListener('click',function(){
-          fee_date.style.display = 'none';
-          expenditure_date.style.display = 'none';
-            classwise_list.style.display = 'none';
-            student_details_form.style.display = 'none';
-            finance_list.style.display = 'none';
-            employee_details_form.style.display = 'block';
-        });
-
-        past_finance.addEventListener('click',function(){
-          classwise_list.style.display = 'none';
-          student_details_form.style.display = 'none';
-          employee_details_form.style.display = 'none';
-          fee_date.style.display = 'none';
-          expenditure_date.style.display = 'none';
-          finance_list.style.display = 'block';
-        });
-
-        fee.addEventListener('click',function(){
-          expenditure_date.style.display = 'none';
-          fee_date.style.display = 'block';
-        });
-        expenditure.addEventListener('click',function(){
-          fee_date.style.display = 'none';
-          expenditure_date.style.display = 'block';
-        });
-
-
-
-
-
-
 document.addEventListener("DOMContentLoaded", function () {
   var loadingBar = document.getElementById("loading-bar");
   var messageContainer = document.getElementById("message-container");
@@ -101,4 +34,76 @@ document.addEventListener("DOMContentLoaded", function () {
           loadingBar.style.left = width + "%";
       }
   }, 25); // Adjust the speed of the loading bar animation by changing the interval duration
+});
+
+const classwise_student_list = document.getElementById('classwise_student_list');
+const student_complete_details = document.getElementById('student_complete_details');
+const employee_details = document.getElementById('employee_details');
+const past_finance = document.getElementById('past_finance');
+const finance_list = document.getElementById('finance_list');
+
+const classwise_list = document.getElementById('classwise_list');
+
+
+const student_details_form = document.getElementById('student_details_form');
+
+const employee_details_form = document.getElementById('employee_details_form');
+
+const fee = document.getElementById('fee');
+const fee_date = document.getElementById('fee_date');
+
+const expenditure = document.getElementById('expenditure');
+const expenditure_date = document.getElementById('expenditure_date');
+
+const classwise_table = document.getElementById('classwise_table');
+const student_bio = document.getElementById('student_bio');
+
+function hideAll(){
+  finance_list.style.display = 'none';
+  classwise_list.style.display = 'none';
+  student_details_form.style.display = 'none';
+  employee_details_form.style.display = 'none';
+  fee_date.style.display = 'none';
+  expenditure_date.style.display = 'none';
+}
+
+
+
+classwise_student_list.addEventListener('click',function(e){
+  hideAll();
+  console.log(window.location.href)
+  classwise_list.style.display = 'block';
+  
+  if(window.location.href === "http://127.0.0.1:8000/classwise_students/"){
+    classwise_table.style.display = 'none';
+  }else if(window.location.href === "http://127.0.0.1:8000/get_student_details/"){
+    student_bio.style.display = 'none';
+  }
+  
+  
+});
+
+student_complete_details.addEventListener('click',function(){
+  hideAll();
+  student_details_form.style.display = 'block';
+});
+
+employee_details.addEventListener('click',function(){
+  hideAll();
+  employee_details_form.style.display = 'block';
+});
+
+fee.addEventListener('click',function(){
+  hideAll();
+  fee_date.style.display = 'block';
+});
+
+expenditure.addEventListener('click',function(){
+  hideAll();
+  expenditure_date.style.display = 'block'; 
+});
+
+past_finance.addEventListener('click',function(){
+  // hideAll();
+  finance_list.style.display = 'block';
 });
