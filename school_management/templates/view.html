@@ -1,8 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "main.css" %}">
+    <link rel="stylesheet" href="{% static "form.css" %}">
+    <link rel="stylesheet" href="{% static "sidebar.css" %}">
+    <script src="https://kit.fontawesome.com/0ceeca1f1f.js" crossorigin="anonymous"></script>
     <title>View</title>
     <style>
         #classwise_list{
@@ -53,24 +58,23 @@
           }
           #message-container {
             position: relative;
-            background: #f4f4f4;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 10px;
+            background: rgba(0,174,173,0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 50px auto;
             overflow: hidden;
-            width: 50%;
-        }
+            width: 30%;
+            box-shadow: 0px 0px 10px rgb(0,174,173);
+          }
         
-        #loading-bar {
+          #loading-bar {
             position: absolute;
             bottom: 0;
             left: 100%;
             width: 100%;
-            height: 3px; /* Set the height of the loading bar */
-            background: #0074d9; /* Set the loading bar color */
+            height: 3px; 
+            background: rgb(0,174,173); 
             z-index: 1;
-            {% comment %} transition: left 5s ease-in; {% endcomment %}
         }
         
         #message-content {
@@ -78,66 +82,93 @@
         }
         
         .message {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background: #fff;
-            margin-bottom: 10px;
+          padding: 10px;
+          border-radius: 10px;
+          background: rgba(0, 174, 173,0.6);
+          margin-bottom: 10px;
+          box-shadow: 0px 0px 10px #fff;
+          color: #fff;
+      }
+
+        #finance_list{
+          position: absolute;
+          top: 40%;
+          /* list-style-type: none; */
+          font-size: 18px;
+          line-height: 30px;
+          color: var(--secondary-color);
+          left: 20%;
         }
+
+        #finance_list li{
+            margin-bottom: 10px;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        #finance_list li:hover{
+            color: #fff;
+        }
+
+        select{
+            height: 40px;
+            padding: 10px;
+            width: 60%;
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            outline: none;
+            cursor: pointer;
+            color: var(--secondary-color);
+            font-size: 16px;
+        }
+
+        select:hover{
+            background-color: var(--secondary-color);
+            color: #fff;
+        }
+        
     </style>
 </head>
 <body>
- 
-    <p class="headings" id='classwise_student_list'>ClassWise Students List</p>
-    <form action='/classwise_students/' method='post' id='classwise_list'>
-      {% csrf_token %}
-      <label for="class" name="class">Class</label>
-      <select name="student_class">
-          <option value="" disabled selected>Select the Class</option>
-          <option value="nursery">Nursery</option>
-          <option value="pp-I">PP-I</option>
-          <option value="pp-II">PP-II</option>
-          <option value="I" >I</option>
-          <option value="II" >II</option>
-          <option value="III">III</option>
-          <option value="IV">IV</option>
-          <option value="V">V</option>
-          <option value="VI">VI</option>
-          <option value="VII">VII</option>
-          <option value="VIII">VIII</option>
-          <option value="IX">IX</option>
-          <option value="X">X</option>
-          <option value="XI">XI</option>
-          <option value="XII">XII</option>
-      </select>
-      <br></br>
-      <label for="section" class="labels">Section</label>
-      <input type="text" name="section">
-      <button type='submit'>View List</button>
-  </form>
+  <div class="navbar1">
+    <div class="hamburger1" id="menus"><i class="fa-solid fa-bars"></i></div>
+    <div class="school_title">
+        <a href="{% url "index" %}"><h3 style="font-size: 40px;">Champ School</h3></a>
+    </div>
+    <div>
+      <a href="{% url "login" %}" class="login">
+        <div class="Login">
+          <i class="fa-solid fa-user"></i>
+        </div>
+    </a>
+  </div>
+  </div>
 
-    <p class="headings" id='student_complete_details'>Student Particulars</p>
-    <form action="/get_student_details/" method="post" id="student_details_form">
-        {% csrf_token %}
-        <label for="adm_no">Enter Admission Number:</label>
-        <input type="text" name="adm_no" required>
-        <button type="submit">Get Student Details</button>
-      </form>
-
-    <p class="headings" id='employee_details'>Employee Particulars</p>
-    <form method="post" action="/get_employee_details/" id='employee_details_form'>
-        {% csrf_token %}
-        <label for="employee_id">Enter Employee ID:</label>
-        <input type="text" name="employee_id" required>
-        <button type="submit">Get Employee Details</button>
-    </form>
-
-    <p class="headings" id='past_finance'>Past Finance</p>
-    <ul id='finance_list'>
-      <li id='fee'>Fee Records</li>
-      <li id='expenditure'>Expenditures</li>
+  <div class="side-bar">
+    <div id="close"><i class="fa-solid fa-xmark"></i></div>
+    <ul>
+      <li><a href="{% url "index" %}">Home</a></li>
+      <li><a href="admission.html">Admission</a></li>
+      <li><a href="{% url "academics" %}">Academics</a></li>
+      <li><a href="{% url "life" %}">Student Life</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="{% url "login" %}">Login</a></li>
     </ul>
-    
+  </div>
+
+  <div class="side">
+    <ul>
+      <li class="headings" id='classwise_student_list'>ClassWise Students List</li>
+      <li class="headings" id='student_complete_details'>Student Particulars</li>
+      <li class="headings" id='employee_details'>Employee Particulars</li>
+      <li class="headings" id='past_finance'>Past Finance</li>
+    </ul>
+      <div id='finance_list'>
+        <li id='fee'>Fee Records</li>
+        <li id='expenditure'>Expenditures</li>
+      </div>
+    </div>
+
     {% for msg in messages %}
     <div id="message-container">
         <div id="loading-bar"></div>
@@ -149,19 +180,77 @@
     </div>
     {% endfor %}
 
-    <form action='/past_fee_records/' method='post' id='fee_date'>
-      {% csrf_token %}
-      <label>Date</label>
-      <input type='date' name='date'>
-      <button type='submit'>View Fee Records</button>
-    </form>
+    <div class="main">
+      <form action='/classwise_students/' method='post' id='classwise_list'>
+        {% csrf_token %}
+        <h4>Classwise List</h4>
+        <div class="single">
+          <label for="class" name="class">Class</label>
+          <select name="student_class">
+              <option value="" disabled selected>Select the Class</option>
+              <option value="nursery">Nursery</option>
+              <option value="pp-I">PP-I</option>
+              <option value="pp-II">PP-II</option>
+              <option value="I" >I</option>
+              <option value="II" >II</option>
+              <option value="III">III</option>
+              <option value="IV">IV</option>
+              <option value="V">V</option>
+              <option value="VI">VI</option>
+              <option value="VII">VII</option>
+              <option value="VIII">VIII</option>
+              <option value="IX">IX</option>
+              <option value="X">X</option>
+              <option value="XI">XI</option>
+              <option value="XII">XII</option>
+          </select>
+        </div>
+        <div class="single">
+          <label for="section" class="labels">Section</label>
+          <input type="text" name="section">
+        </div>
+        <button type='submit'>View List</button>
+      </form>
 
-    <form action='/past_expenditure_records/' method='post' id='expenditure_date'>
-      {% csrf_token %}
-      <label>Date</label>
-      <input type='date' name='date'>
-      <button type='submit'>View Expenses</button>
-    </form>
+      <form action="/get_student_details/" method="post" id="student_details_form">
+          {% csrf_token %}
+          <h4>Student Details Form</h4>
+          <div class="single">
+            <label for="adm_no">Enter Admission Number:</label>
+            <input type="text" name="adm_no" required>
+          </div>
+          <button type="submit" style="width: 200px;">Get Student Details</button>
+        </form>
+
+      <form method="post" action="/get_employee_details/" id='employee_details_form'>
+          {% csrf_token %}
+          <h4>Employee Details Form</h4>
+          <div class="single">
+            <label for="employee_id">Enter Employee ID:</label>
+            <input type="text" name="employee_id" required>
+          </div>
+          <button type="submit" style="width: 250px;">Get Employee Details</button>
+      </form>
+
+      <form action='/past_fee_records/' method='post' id='fee_date'>
+        {% csrf_token %}
+        <h4>Fee Date</h4>
+        <div class="single">
+          <label>Date</label>
+          <input type='date' name='date'>
+        </div>
+        <button type='submit' style="width: 200px;">View Fee Records</button>
+      </form>
+
+      <form action='/past_expenditure_records/' method='post' id='expenditure_date'>
+        {% csrf_token %}
+        <h4>Expenditure Date</h4>
+        <div class="single">
+          <label>Date</label>
+          <input type='date' name='date'>
+        </div>
+        <button type='submit' style="width: 200px;">View Expenses</button>
+      </form>
 
   {% if list %}
     <table id= "classwise_table">
@@ -197,7 +286,7 @@
     
     
   {% if student %}
-        <table>
+        <table id="student_bio">
             <tr>
             <th>Admission No</th>
             <td>{{ student.adm_no }}</td>
@@ -263,7 +352,7 @@
      {% endif %}
 
   {% if employee %}
-        <table>
+        <table id="employee_bio">
             <tr>
                 <td>Employee ID</td>
                 <td>{{ employee.employee_id }}</td>
@@ -333,7 +422,7 @@
 
    
  {% if fee_record %}
-    <table>
+    <table id="fee_record_table">
       <thead>
           <tr>
               <th>Receipt No</th>
@@ -363,7 +452,7 @@
 
     
  {% if expenditure_record %}
-    <table>
+    <table id="exp_record_table">
       <thead>
           <tr>
               <th>Date</th>
@@ -382,87 +471,29 @@
       </tbody>
   </table>
   {% endif %}
+  </div>
 
-  <script>
-        const classwise_student_list = document.getElementById('classwise_student_list');
-        const classwise_list= document.getElementById('classwise_list');
-        const past_finance = document.getElementById('past_finance');
-        const finance_list = document.getElementById('finance_list');
-        const fee = document.getElementById('fee');
-        const fee_date = document.getElementById('fee_date');
-        const expenditure = document.getElementById('expenditure');
-        const expenditure_date = document.getElementById('expenditure_date');
+  <footer>
+    <div class="footer">
+      <div class="info">
+        <h4>Champ School</h4>
+      </div>
+      <div class="social">
+        <ul>
+          <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+          <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+          <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+          <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+        </ul>
+      </div>
+      <div class="rights">
+        <p><i class="fa-solid fa-copyright"></i> Copyrights reserved.</p>
+      </div>
+    </div>
+    
+  </footer>
 
 
-        const student_complete_details=document.getElementById('student_complete_details');
-        const student_details_form = document.getElementById('student_details_form');
-
-        const employee_details =document.getElementById('employee_details');
-        const employee_details_form=document.getElementById('employee_details_form');
-
-        classwise_student_list.addEventListener('click',function(){
-          fee_date.style.display = 'none';
-          expenditure_date.style.display = 'none';
-            student_details_form.style.display = 'none';
-            employee_details_form.style.display = 'none';
-            finance_list.style.display = 'none';
-            classwise_list.style.display = 'block';
-        });
-
-        student_complete_details.addEventListener('click',function(){
-          fee_date.style.display = 'none';
-          expenditure_date.style.display = 'none';
-            classwise_list.style.display = 'none';
-            employee_details_form.style.display = 'none';
-            finance_list.style.display = 'none';
-            student_details_form.style.display = 'block';
-        });
-
-        employee_details.addEventListener('click',function(){
-          fee_date.style.display = 'none';
-          expenditure_date.style.display = 'none';
-            classwise_list.style.display = 'none';
-            student_details_form.style.display = 'none';
-            finance_list.style.display = 'none';
-            employee_details_form.style.display = 'block';
-        });
-
-        past_finance.addEventListener('click',function(){
-          classwise_list.style.display = 'none';
-          student_details_form.style.display = 'none';
-          employee_details_form.style.display = 'none';
-          fee_date.style.display = 'none';
-          expenditure_date.style.display = 'none';
-          finance_list.style.display = 'block';
-        });
-
-        fee.addEventListener('click',function(){
-          expenditure_date.style.display = 'none';
-          fee_date.style.display = 'block';
-        });
-        expenditure.addEventListener('click',function(){
-          fee_date.style.display = 'none';
-          expenditure_date.style.display = 'block';
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-          var loadingBar = document.getElementById("loading-bar");
-          var messageContainer = document.getElementById("message-container");
-      
-          // Animate the loading bar
-          var width = 100;
-          var interval = setInterval(function () {
-              if (width <= 0) {
-                  clearInterval(interval);
-                  // Hide the message container
-                  messageContainer.style.display = "none";
-              } else {
-                  width -= 1;
-                  loadingBar.style.left = width + "%";
-              }
-          }, 25); // Adjust the speed of the loading bar animation by changing the interval duration
-      });
-
-    </script>
+  <script src="{% static "view.js" %}"></script>
 </body>
 </html>

@@ -1,8 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "main.css" %}">
+    <link rel="stylesheet" href="{% static "form.css" %}">
+    <link rel="stylesheet" href="{% static "sidebar.css" %}">
+    <script src="https://kit.fontawesome.com/0ceeca1f1f.js" crossorigin="anonymous"></script>
     <title>Defaults</title>
     <style>
         #classwise_fee_form{
@@ -25,13 +30,13 @@
         }
         #message-container {
             position: relative;
-            background: #f4f4f4;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 10px;
+            background: rgba(0,174,173,0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 50px auto;
             overflow: hidden;
-            width: 50%;
+            width: 30%;
+            box-shadow: 0px 0px 10px rgb(0,174,173);
         }
         
         #loading-bar {
@@ -39,10 +44,9 @@
             bottom: 0;
             left: 100%;
             width: 100%;
-            height: 3px; /* Set the height of the loading bar */
-            background: #0074d9; /* Set the loading bar color */
+            height: 3px; 
+            background: rgb(0,174,173); 
             z-index: 1;
-            {% comment %} transition: left 5s ease-in; {% endcomment %}
         }
         
         #message-content {
@@ -51,22 +55,81 @@
         
         .message {
             padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background: #fff;
+            border-radius: 10px;
+            background: rgba(0, 174, 173,0.6);
             margin-bottom: 10px;
+            box-shadow: 0px 0px 10px #fff;
+            color: #fff;
+        }
+
+        .side ul{
+            padding: 20px;
+        }
+
+        form select{
+            height: 40px;
+            padding: 10px;
+            width: 60%;
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            outline: none;
+            cursor: pointer;
+            color: var(--secondary-color);
+            font-size: 16px;
+        }
+
+        form select:hover{
+            background-color: var(--secondary-color);
+            color: #fff;
         }
         
+        .main .single{
+            margin-top: 20px;
+        }
+        .modify_fee_fill , .modify_area{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction:column;
+        }
     </style>
 </head>
 <body>
-    <ul>
-        <li id="classwise_fee">ClassWise Fee Details</li>
-        <li id="areawise">Area Wise Transport Fee Details</li>
-        <li id="Activities">Cocurricular-Activities</li>
-        <li id="modify_fee">Modify ClassWise Fee Details</li>
-        <li id="modify_transport">Modify Area Wise Transport Fee Details</li>
-    </ul>
+    <div class="navbar1">
+        <div class="hamburger1" id="menus"><i class="fa-solid fa-bars"></i></div>
+        <div class="school_title">
+            <a href="{% url "index" %}"><h3 style="font-size: 40px;">Champ School</h3></a>
+        </div>
+        <div>
+          <a href="{% url "login" %}" class="login">
+            <div class="Login">
+              <i class="fa-solid fa-user"></i>
+            </div>
+        </a>
+      </div>
+      </div>
+
+      <div class="side-bar">
+        <div id="close"><i class="fa-solid fa-xmark"></i></div>
+        <ul>
+          <li><a href="{% url "index" %}">Home</a></li>
+          <li><a href="admission.html">Admission</a></li>
+          <li><a href="{% url "academics" %}">Academics</a></li>
+          <li><a href="{% url "life" %}">Student Life</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="{% url "login" %}">Login</a></li>
+        </ul>
+    </div>
+
+    <div class="side">
+        <ul>
+            <li id="classwise_fee">ClassWise Fee Details</li>
+            <li id="areawise">Area Wise Transport Fee Details</li>
+            <li id="Activities">Cocurricular-Activities</li>
+            <li id="modify_fee">Modify ClassWise Fee Details</li>
+            <li id="modify_transport">Modify Area Wise Transport Fee Details</li>
+        </ul>
+    </div>
 
     {% for msg in messages %}
     <div id="message-container">
@@ -79,186 +142,183 @@
     </div>
     {% endfor %}
 
-    <form action='/classwise_fee/' method="post" id="classwise_fee_form">
-        {% csrf_token %}
-        <label for="class" name="class">Class</label>
-        <select name="student_class">
-            <option value="" disabled selected>Select the Class</option>
-            <option value="nursery">Nursery</option>
-            <option value="pp-I">PP-I</option>
-            <option value="pp-II">PP-II</option>
-            <option value="I" >I</option>
-            <option value="II" >II</option>
-            <option value="III">III</option>
-            <option value="IV">IV</option>
-            <option value="V">V</option>
-            <option value="VI">VI</option>
-            <option value="VII">VII</option>
-            <option value="VIII">VIII</option>
-            <option value="IX">IX</option>
-            <option value="X">X</option>
-            <option value="XI">XI</option>
-            <option value="XII">XII</option>
-        </select>
+    <div class="main">
+        <form action='/classwise_fee/' method="post" id="classwise_fee_form">
+            {% csrf_token %}
+            <h4>Classwise Fee Form</h4>
+            <div class="single">
+                <label for="class" name="class">Class</label>
+                <select name="student_class">
+                    <option value="" disabled selected>Select the Class</option>
+                    <option value="nursery">Nursery</option>
+                    <option value="pp-I">PP-I</option>
+                    <option value="pp-II">PP-II</option>
+                    <option value="I" >I</option>
+                    <option value="II" >II</option>
+                    <option value="III">III</option>
+                    <option value="IV">IV</option>
+                    <option value="V">V</option>
+                    <option value="VI">VI</option>
+                    <option value="VII">VII</option>
+                    <option value="VIII">VIII</option>
+                    <option value="IX">IX</option>
+                    <option value="X">X</option>
+                    <option value="XI">XI</option>
+                    <option value="XII">XII</option>
+                </select>
+            </div>
+            <div class="single">
+                <label for="tuition_fee" class="models">Tuition Fee</label>
+                <input type="number" name="tuition_fee">
+            </div>
+            <div class="single">
+                <label for="exam_fee" class="models">Exam Fee</label>
+                <input type="number" name="exam_fee">
+            </div>
+            <div class="single">
+                <label for="miscellaneous_fee" class="models">Miscellaneous Fee</label>
+                <input type="number" name="miscellaneous_fee">
+            </div>
+            <button type='submit'>Set</button>
+        </form>
+
+        <form action="/transport/" method="post" id="transport">
+            {% csrf_token %}
+            <h4>Transport</h4>
+            <div class="single">
+                <label for="area_id" class="models">Area Id</label>
+                <input type="number" name="area_id">
+            </div>
+            <div class="single">
+                <label for="area_name" class="models">Area Name</label>
+                <input type="text" name="area_name">
+            </div>
+            <div class="single">
+                <label for="transport_fee" class="models">Transport Fee</label>
+                <input type="number" name="transport_fee">
+            </div>
+            <button type="submit">Set</button>
+        </form>
+
+        <form action="/activities/" method="post" id="activities">
+            {% csrf_token %}
+            <h4>Activities</h4>
+            <div class="single">
+                <label for="activity_id" class="models">Activity Id</label>
+                <input type="text" name="activity_id">
+            </div>
+            <div class="single">
+                <label for="activity" class="models">Activity</label>
+                <input type="text" name="activity_name">
+            </div>
+            <button type='submit'>Set</button>
+        </form>
         
-        <label for="tuition_fee" class="models">Tuition Fee</label>
-        <input type="number" name="tuition_fee">
-        <label for="exam_fee" class="models">Exam Fee</label>
-        <input type="number" name="exam_fee">
-        <label for="miscellaneous_fee" class="models">Miscellaneous Fee</label>
-        <input type="number" name="miscellaneous_fee">
-        <button type='submit'>Set</button>
-    </form>
+        <form action='/modify_fee/' method='post' id='modify_fee_form'>
+            {% csrf_token %}
+            <input type='hidden' name='form_type' value='fetch'>
+            <h4>Modify Fee Form</h4>
+            <div class="single">
+                <label for="class" name="class">Class</label>
+                <select name="student_class">
+                    <option value="" disabled selected>Select the Class</option>
+                    <option value="nursery">Nursery</option>
+                    <option value="pp-I">PP-I</option>
+                    <option value="pp-II">PP-II</option>
+                    <option value="I" >I</option>
+                    <option value="II" >II</option>
+                    <option value="III">III</option>
+                    <option value="IV">IV</option>
+                    <option value="V">V</option>
+                    <option value="VI">VI</option>
+                    <option value="VII">VII</option>
+                    <option value="VIII">VIII</option>
+                    <option value="IX">IX</option>
+                    <option value="X">X</option>
+                    <option value="XI">XI</option>
+                    <option value="XII">XII</option>
+                </select>
+            </div>
+            <button type='submit'>Fetch Details</button>
+        </form>
 
-    <form action="/transport/" method="post" id="transport">
-        {% csrf_token %}
-        <label for="area_id" class="models">Area Id</label>
-        <input type="number" name="area_id">
-        <label for="area_name" class="models">Area Name</label>
-        <input type="text" name="area_name">
-        <label for="transport_fee" class="models">Transport Fee</label>
-        <input type="number" name="transport_fee">
-        <button type="submit">Set</button>
-    </form>
+        {% if fee_details %}
+        <form action='/modify_fee/' method='post' class="modify_fee_fill">
+            {% csrf_token %}
+            <input type='hidden' name='form_type' value='fill'>
+            <h4>Modify Fee</h4>
+            <div class="single">
+                <label for="student_class">Student Class</label>
+                <input type="text" name="student_class" placeholder={{ fee_details.student_class }}>
+            </div>
+            <div class="single">
+                <label for="tuition_fee">Tuition Fee</label>
+                <input type="text" name="tuition_fee" placeholder={{ fee_details.tuition_fee }}>
+            </div>
+            <div class="single">
+                <label for="exam_fee">Exam Fee</label>
+                <input type="text" name="exam_fee" placeholder={{ fee_details.exam_fee }}>
+            </div>
+            <div class="single">       
+                <label for="miscellaneous_fee">Miscellaneous Fee</label>
+                <input type="text" name="miscellaneous_fee" placeholder={{ fee_details.miscellaneous_fee }}>
+            </div>
+            <button type='submit'>Save Changes</button>
+        </form>
+        {% endif %}
 
-    <form action="/activities/" method="post" id="activities">
-        {% csrf_token %}
-        <label for="activity_id" class="models">Activity Id</label>
-        <input type="text" name="activity_id">
-        <label for="activity" class="models">Activity</label>
-        <input type="text" name="activity_name">
-        <button type='submit'>Set</button>
-    </form>
-    
-    <form action='/modify_fee/' method='post' id='modify_fee_form'>
-        {% csrf_token %}
-        <input type='hidden' name='form_type' value='fetch'>
-        <label for="class" name="class">Class</label>
-        <select name="student_class">
-            <option value="" disabled selected>Select the Class</option>
-            <option value="nursery">Nursery</option>
-            <option value="pp-I">PP-I</option>
-            <option value="pp-II">PP-II</option>
-            <option value="I" >I</option>
-            <option value="II" >II</option>
-            <option value="III">III</option>
-            <option value="IV">IV</option>
-            <option value="V">V</option>
-            <option value="VI">VI</option>
-            <option value="VII">VII</option>
-            <option value="VIII">VIII</option>
-            <option value="IX">IX</option>
-            <option value="X">X</option>
-            <option value="XI">XI</option>
-            <option value="XII">XII</option>
-        </select>
-        <button type='submit'>Fetch Details</button>
-    </form>
+        <form action='/modify_transport/' method='post' id='modify_transport_form'>
+            {% csrf_token %}
+            <input type='hidden' name='form_type' value='fetch'>
+            <h4>Modify Transport Form</h4>
+            <div class="single">
+                <label for="area_id" class="models">Area Id</label>
+                <input type="number" name="area_id">
+            </div>
+            <button type='submit'>Fetch Details</button>
+        </form>
 
-    {% if fee_details %}
-    <form action='/modify_fee/' method='post'>
-        {% csrf_token %}
-        <input type='hidden' name='form_type' value='fill'>
-        <label for="student_class">Student Class</label>
-        <input type="text" name="student_class" placeholder={{ fee_details.student_class }}>
-                
-        <label for="tuition_fee">Tuition Fee</label>
-        <input type="text" name="tuition_fee" placeholder={{ fee_details.tuition_fee }}>
-                
-        <label for="exam_fee">Exam Fee</label>
-        <input type="text" name="exam_fee" placeholder={{ fee_details.exam_fee }}>
-                
-        <label for="miscellaneous_fee">Miscellaneous Fee</label>
-        <input type="text" name="miscellaneous_fee" placeholder={{ fee_details.miscellaneous_fee }}>
+        {% if area_details %}
+        <form action='/modify_transport/' method ='post' class="modify_area">
+            {% csrf_token %}
+            <input type='hidden' name='form_type' value='fill'>
+            <div class="single">
+            <label for="area_id">Area ID</label>
+            <input type="text" name="area_id" placeholder={{ area_details.area_id }}>
+            </div>
+            <div class="single">
+            <label for="area_name">Area Name</label>
+            <input type="text" name="area_name" placeholder={{ area_details.area_name }}>
+            </div>
+            <div class="single">
+            <label for="transport_fee">Transport Fee</label>
+            <input type="text" name="transport_fee" placeholder={{ area_details.transport_fee }}>
+            </div>
+            <button type='submit'>Save Changes</button>
+        </form>
+        {% endif %}
+    </div>
+
+    <footer>
+        <div class="footer">
+          <div class="info">
+            <h4>Champ School</h4>
+          </div>
+          <div class="social">
+            <ul>
+              <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+              <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+              <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+            </ul>
+          </div>
+          <div class="rights">
+            <p><i class="fa-solid fa-copyright"></i> Copyrights reserved.</p>
+          </div>
+        </div>
         
-        <button type='submit'>Save Changes</button>
-    {% endif %}
+    </footer>
 
-    <form action='/modify_transport/' method='post' id='modify_transport_form'>
-        {% csrf_token %}
-        <input type='hidden' name='form_type' value='fetch'>
-        <label for="area_id" class="models">Area Id</label>
-        <input type="number" name="area_id">
-        <button type='submit'>Fetch Details</button>
-    </form>
-
-    {% if area_details %}
-    <form action='/modify_transport/' method ='post'>
-        {% csrf_token %}
-        <input type='hidden' name='form_type' value='fill'>
-        <label for="area_id">Area ID</label>
-        <input type="text" name="area_id" placeholder={{ area_details.area_id }}>
-
-        <label for="area_name">Area Name</label>
-        <input type="text" name="area_name" placeholder={{ area_details.area_name }}>
-
-        <label for="transport_fee">Transport Fee</label>
-        <input type="text" name="transport_fee" placeholder={{ area_details.transport_fee }}>
-
-        <button type='submit'>Save Changes</button>
-    {% endif %}
-
-    <script>
-        const classwiseFee = document.getElementById('classwise_fee');
-        const classwiseFeeForm = document.getElementById('classwise_fee_form');
-        const areawise = document.getElementById('areawise');
-        const transport = document.getElementById('transport');
-        const activities = document.getElementById('Activities');
-        const activitiesForm = document.getElementById('activities');
-        const modify_fee = document.getElementById('modify_fee');
-        const modify_fee_form=document.getElementById('modify_fee_form');
-        const modify_transport = document.getElementById('modify_transport');
-        const modify_transport_form = document.getElementById('modify_transport_form');
-    
-        function hideAllForms() {
-            classwiseFeeForm.style.display = 'none';
-            transport.style.display = 'none';
-            activitiesForm.style.display = 'none';
-            modify_fee_form.style.display = 'none';
-            modify_transport_form.style.display = 'none';
-        }
-    
-        classwiseFee.addEventListener('click', function () {
-            hideAllForms();
-            classwiseFeeForm.style.display = 'block';
-        });
-    
-        areawise.addEventListener('click', function () {
-            hideAllForms();
-            transport.style.display = 'block';
-        });
-    
-        activities.addEventListener('click', function () {
-            hideAllForms();
-            activitiesForm.style.display = 'block';
-        });
-
-        modify_fee.addEventListener('click',function(){
-            hideAllForms();
-            modify_fee_form.style.display = 'block';
-        });
-
-        modify_transport.addEventListener('click',function(){
-            modify_transport_form.style.display = 'block';
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            var loadingBar = document.getElementById("loading-bar");
-            var messageContainer = document.getElementById("message-container");
-        
-            // Animate the loading bar
-            var width = 100;
-            var interval = setInterval(function () {
-                if (width <= 0) {
-                    clearInterval(interval);
-                    // Hide the message container
-                    messageContainer.style.display = "none";
-                } else {
-                    width -= 1;
-                    loadingBar.style.left = width + "%";
-                }
-            }, 25); // Adjust the speed of the loading bar animation by changing the interval duration
-        });
-    </script>  
+    <script src="{% static "defaults.js" %}"></script>  
 </body>
 </html>
