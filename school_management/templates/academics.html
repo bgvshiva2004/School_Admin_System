@@ -37,10 +37,11 @@
           <li><a href="{% url "life" %}">Student Life</a></li>
           <li><a href="about.html">About Us</a></li>
           {% if user.is_authenticated %}
-          <li><a href="{% url "logout" %}">Logout</a></li>
-          {% else %}
-          <li><a href="{% url "login" %}">Login</a></li>
-          {% endif %}
+        <li><a href="{% url "admin_interface" %}">Admin Operations</a></li>
+        <li><a href="{% url "logout" %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url "login" %}">Login</a></li>
+        {% endif %}
         </ul>
     </div>
 

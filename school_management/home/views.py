@@ -100,24 +100,6 @@ def new_student(request):
             )
     
             student.save()
-    
-            # student_details = {
-            #     'adm_no': adm_no,
-            #     'first_name': first_name,
-            #     'last_name': last_name,
-            #     'gender': gender,
-            #     'dob': dob,
-            #     'aadhar': aadhar,
-            #     'student_class': student_class,
-            #     'section': section,
-            #     'mother_tongue': mother_tongue,
-            #     'father_name': father_name,
-            #     'father_occupation': father_occupation,
-            #     'mother_name': mother_name,
-            #     'mother_occupation': mother_occupation,
-            #     'contact': contact,
-            #     'address': address,
-            # }
 
             messages.success(request,"Student Enrolled Successfully")
 
