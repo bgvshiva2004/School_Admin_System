@@ -172,6 +172,18 @@
           margin-top : 10px;
           color : rgb(24, 188, 156);
       }
+      .hamburger1,.Login{
+        color: white;
+      }
+      .hamburger1:hover, .Login:hover{
+        color: black;
+      }
+      .Login{
+        border: 2px solid #fff;
+      }
+      .Login:hover{
+        border: 2px solid Black;
+      }
     </style>
 </head>
 
@@ -180,7 +192,7 @@
   <div class="navbar1">
     <div class="hamburger1" id="menus"><i class="fa-solid fa-bars"></i></div>
     <div class="school_title">
-        <a href="{% url "index" %}"><h3 style="font-size: 32px;">CHAMP INTERNATIONAL SCHOOL</h3></a>
+        <a href="{% url "index" %}"><h3 style="font-size: 32px; color: #fff;">CHAMP INTERNATIONAL SCHOOL</h3></a>
     </div>
     <div>
       <a href="{% url "login" %}" class="login">
