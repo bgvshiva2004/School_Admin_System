@@ -32,9 +32,10 @@ https://github.com/bgvshiva2004/School_Admin_System.git ```
 
 ![admin_interface](./admin_interface.png)
 
-*Upon navigating into the enroll section, the user encounters four different sections namely : 
-** Student Management
-** Employee Management
-** Finance
-** Set Defaults
+* Upon navigating into the enroll section, the user encounters four different diversities namely:
+
+  - Student Management
+  - Employee Management
+  - Finance
+  - Set Defaults
   
