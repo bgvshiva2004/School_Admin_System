@@ -31,4 +31,10 @@ https://github.com/bgvshiva2004/School_Admin_System.git ```
 * Once the user's login credentials matches with the authenticated admin role based credentials, the page redirects to the main working interface
 
 ![admin_interface](./admin_interface.png)
+
+*Upon navigating into the enroll section, the user encounters four different sections namely : 
+** Student Management
+** Employee Management
+** Finance
+** Set Defaults
   
