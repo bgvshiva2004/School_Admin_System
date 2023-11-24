@@ -38,4 +38,8 @@ https://github.com/bgvshiva2004/School_Admin_System.git ```
   - Employee Management
   - Finance
   - Set Defaults
+
+* Further, the sections aloow the admin to make different operations. For example, the operations that 'Set Defaults' avail are depicted as follows (in the white card region which appeared through flip on hover):
+
+![enroll](./enroll.png)
   
