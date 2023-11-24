@@ -14,3 +14,4 @@ https://github.com/bgvshiva2004/School_Admin_System.git ```
 * K.Tejaswini Raj : 220001041 / CSE / IIT INDORE
 
 ## Web Interface
+![landing_Page](./landing_page.png)
