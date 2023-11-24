@@ -7,6 +7,8 @@ The prime intuition in developing the website is to provide an attractive and a 
 Clone the github repository through the following command : ``` git clone 
 https://github.com/bgvshiva2004/School_Admin_System.git ```
 
+* After cloning the repository into the local environment, make sure to change the MySQL database' USER and Password Credentials to the respective MySQL workbench credentials. 
+
 ## Team 
 * K.Niketh Reddy : 220001040 / CSE / IIT INDORE
 * B.G.V.Shiva : 220002029 / CSE / IIT INDORE
@@ -42,4 +44,6 @@ https://github.com/bgvshiva2004/School_Admin_System.git ```
 * Further, the sections aloow the admin to make different operations. For example, the operations that 'Set Defaults' avail are depicted as follows (in the white card region which appeared through flip on hover):
 
 ![enroll](./enroll.png)
-  
+
+* Similarly, all the necessary operations and facilities are availed that are required for a school Admin officer, in a quite sorted and organised manner.
+
