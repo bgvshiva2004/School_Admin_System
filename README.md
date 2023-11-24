@@ -15,3 +15,18 @@ https://github.com/bgvshiva2004/School_Admin_System.git ```
 
 ## Web Interface
 ![landing_Page](./landing_page.png)
+
+## Prerequisites 
+### Front-end
+* HTML
+* CSS
+* JS
+### Back-end
+* Django
+* MySQL
+
+  ## Usage and Web Workflow
+  * After giving a glance over the home page and other additional pages,the user navigates to the login page where the login box with the credentials of username and password are present besides an additional dropdown slot- role which has the values Admin, Employee, Student.
+  * Though the further interface and working operations are provided only for the person with admin role, the future development relies on developing an interface for the student and employee as well.
+![login](./login.png)
+  
