@@ -29,4 +29,5 @@ https://github.com/bgvshiva2004/School_Admin_System.git ```
 * After giving a glance over the home page and other additional pages,the user navigates to the login page where the login box with the credentials of username and password are present besides an additional dropdown slot- role which has the values Admin, Employee, Student.
 * Though the further interface and working operations are provided only for the person with admin role, the future development relies on developing an interface for the student and employee as well.
 * Once the user's login credentials matches with the authenticated admin role based credentials, the page redirects to the main working interface
+![interface](./interface.png)
   
