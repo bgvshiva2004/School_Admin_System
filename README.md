@@ -13,7 +13,7 @@ https://github.com/bgvshiva2004/School_Admin_System.git ```
 * K.Niketh Reddy : 220001040 / CSE / IIT INDORE
 * B.G.V.Shiva : 220002029 / CSE / IIT INDORE
 * P.Madan : 220001043 / CSE / IIT INDORE
-* K.Tejaswini Raj : 220001041 / CSE / IIT INDORE
+* K.Tejaswini : 220001041 / CSE / IIT INDORE
 
 ## Web Interface
 ![landing_Page](./landing_page.png)
